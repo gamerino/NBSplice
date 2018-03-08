@@ -159,7 +159,7 @@ $(document).ready(function () {
 <h4 class="date"><em>8 marzo 2018</em></h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-<p>NBSplice is an R package that uses isoform expression counts to evaluate differential splicing by means of generalized linear models at the gene level. The package allows the estimation of differences between isoforms’ relative expression to infer changes in alternative splicing patterns. This vignette explains the use of the package in a typical analysis workflow. NBSplice package version: 1.0.0</p>
+<p>NBSplice is an R package that uses isoform expression counts to evaluate differential splicing by means of generalized linear models at the gene level. The package allows the estimation of differences between isoforms’ relative expression to infer changes in alternative splicing patterns. This vignette explains the use of the package in a typical analysis workflow. NBSplice package version: 1.0.1</p>
 </div>
 
 </div>
@@ -194,7 +194,7 @@ $(document).ready(function () {
 
 <div id="nbsplice-installation" class="section level1">
 <h1>NBSplice installation</h1>
-<p><code>NBSplice</code> is an R package sitting on GitHub. The easy way to install it is using the <code>devtools</code> package. You can install it from CRAN doing:</p>
+<p><code>NBSplice</code> is an R package sitting on GitHub. You could downolad it from the repository and then use <code>R CMD install</code>. Another easy way to install it is using the <code>devtools</code> package. You can install it from CRAN doing:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</code></pre></div>
 <p>Then, you need to load <code>devtools</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)</code></pre></div>
@@ -300,7 +300,7 @@ $(document).ready(function () {
 ## 
 ## Formula: 
 ##  counts ~ condition + iso + condition:iso
-## &lt;environment: 0x68d8988&gt;</code></pre>
+## &lt;environment: 0x7e48090&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">isoCounts</span>(myIsoDataSet))</code></pre></div>
 <pre><code>##                      C1R1      C1R2     C1R3     C1R4     C2R1      C2R2
 ## ENST00000358244  0.000000   0.00000  0.00000  0.00000   0.0000   0.00000
@@ -546,7 +546,7 @@ T_j=\min \{ \frac{I_j p-value{(m)j}}{m}\}
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] NBSplice_1.0.0
+## [1] NBSplice_1.0.1
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.15        mppa_1.0            pillar_1.1.0       

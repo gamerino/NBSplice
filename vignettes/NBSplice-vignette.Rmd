@@ -27,7 +27,8 @@ knitr::opts_chunk$set(tidy=FALSE, cache=TRUE, dev="png", message=FALSE,
     error=FALSE, warning=TRUE)
 ```	
 # NBSplice installation
-`NBSplice` is an R package sitting on GitHub. The easy way to install it is using the `devtools` package. You can install it from CRAN doing:
+`NBSplice` is an R package sitting on GitHub. You could downolad it from the repository and then use `R CMD install`. Another easy way to install it is using the `devtools` package. You can install it from CRAN doing:
+
 ```{r installDev, eval=FALSE}
 install.packages("devtools")
 ```
