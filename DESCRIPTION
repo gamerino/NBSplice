@@ -1,0 +1,57 @@
+Package: NBSplice
+Type: Package
+Version: 1.0.0
+Date: 2017-12-15
+Title: Negative Binomial Models to detect Differential Splicing
+Author: Gabriela A. Merino and Elmer A. Fernandez
+Maintainer: Gabriela Merino <merino.gabriela33@gmail.com>
+Description: The package proposes a differential splicing evaluation method
+    based on isoform quantification. It applies generalized linear models with
+    negative binomial distribution to infer changes in isoform relative
+    expression. 
+URL: http://www.bdmg.com.ar
+License: GPL (>=2)
+Depends:
+    R (>= 3.4.1),
+    methods
+Imports:
+    edgeR,
+    stats,
+    MASS,
+    car,
+    mppa,
+    BiocParallel,
+    ggplot2,
+    reshape2
+Collate: 
+    'NBSplice-package.R'
+    'IsoDataSet.R'
+    'IsoDataSet-getters.R'
+    'IsoDataSet-show.R'
+    'IsoDataSet-print.R'
+    'IsoDataSet-buildLowExpIdx.R'
+    'IsoDataSet-core.R'
+    'NBSpliceRes.R'
+    'NBSpliceRes-initialize.R'
+    'NBSpliceRes-constructor.R'
+    'NBSpliceRes-getters.R'
+    'NBSpliceRes-show.R'
+    'NBSpliceRes-print.R'
+    'IsoDataSet-NBTest.R'
+    'totalGeneCounts.R'
+    'IsoDataSet-initialize.R'
+    'IsoDataSet-constructor.R'
+    'NBSpliceRes-getDSGenes.R'
+    'NBSpliceRes-getDSResults.R'
+    'NBSpliceRes-getGeneResults.R'
+    'NBSpliceRes-plotRatiosDisp.R'
+    'NBSpliceRes-plotVolcano.R'
+    'NBSpliceRes-plotGeneResults.R'
+    'NBSplice-isoCounts.R'
+    'NBSplice-geneIso.R'
+    'NBSplice-designMatrix.R'
+    'NBSplice-myIsoDataSet.R'
+    'NBSplice-myDSResults.R'
+biocViews: Software, Statistical Method, Alternative Splicing, Regression,
+    Differential Expression, Differential Splicing, RNASeq
+RoxygenNote: 6.0.1
