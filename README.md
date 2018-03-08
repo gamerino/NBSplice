@@ -17,4 +17,3 @@ To find the vignette associated with `NBSplice` using R:
 browseVignettes(package = "NBSplice")
 ```
 
-Alternatively, you could view the `NBSplice` vignette [here](https://github.com/gamerino/NBSplice/blob/master/vignettes/NBSplice-vignette.md).
