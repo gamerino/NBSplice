@@ -66,9 +66,6 @@ counts typically reported by the mentioned quantification tools. It is
 not necessary to round those because `NBSplice` will do it internally.
 As an example, we have included an `isoCounts` matrix which is a 
 subset of one of the simulated matrix used to demonstrate `NBSplice` utility.
-```{r,echo=FALSE}
-library(NBSplice)
-```
 
 ```{r expMat, eval=TRUE}
 data(isoCounts, package="NBSplice")
@@ -152,10 +149,12 @@ defined, it is possible to define the `BPPARAM` argument which must be a
 `BiocParallelParam` instance defining the parallel back-end to be used 
 [@biocparallel].
 ```{r object loading, echo=FALSE, eval=TRUE, results="hide"}
+library(NBSplice)
 data(myIsoDataSet, package="NBSplice")
 ```
 
 ```{r objectBuild, eval=FALSE}
+library(NBSplice)
 myIsoDataSet<-IsoDataSet(isoCounts, designMatrix, colName, geneIso)
 ```
 
