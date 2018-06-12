@@ -41,7 +41,8 @@ setMethod(f="GetDSResults", signature="NBSpliceRes", definition=function(
         sigRes<-results(myNBRes, filter=TRUE)
         if(adjusted){
             DSRes<-sigRes[sigRes[, "geneFDR"] < p.value & !is.na(sigRes[, 
-                "geneFDR"] ), ]    
+                "geneFDR"] ), ]
+        }else{
             DSRes<-sigRes[sigRes[, "genePval"] < p.value & !is.na(sigRes[, 
             "genePval"]), ]    
         }
