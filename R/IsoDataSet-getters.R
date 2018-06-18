@@ -8,12 +8,12 @@
 #'should be in CPM scale.
 #'
 #'@return According to the call one of the following objects can be returned
-#' \item{matrix}{Isoform expression matrix.}
-#' \item{matrix}{Gene expression matrix.}
-#' \item{data.frame}{Experiment information.}
-#' \item{data.frame}{Isoforms-gene relationships.}
-#' \item{formula}{Formula to be used in the GLM fit.}
-#' \item{numeric}{Index of low expressed isoforms.}
+#'\item{matrix}{Isoform expression matrix.}
+#'\item{matrix}{Gene expression matrix.}
+#'\item{data.frame}{Experiment information.}
+#'\item{data.frame}{Isoforms-gene relationships.}
+#'\item{formula}{Formula to be used in the GLM fit.}
+#'\item{numeric}{Index of low expressed isoforms.}
 #'@seealso \code{\link{IsoDataSet}}
 #'@name IsoDataSet-getters
 NULL
@@ -71,7 +71,7 @@ setMethod(f="geneCounts", signature="IsoDataSet",
 definition=function(object){
     geneIso<-object@isoGeneRel
     genes<-as.character(unique(geneIso[,"gene_id"]))
-    df<-do.call(rbind, lapply(1:length(genes), function(x){
+    df<-do.call(rbind, lapply(seq_along(genes), function(x){
     aux<-geneIso[geneIso[,"gene_id"]==genes[x], "isoform_id"][1]
     return(object@geneCounts[aux,])    
     }))

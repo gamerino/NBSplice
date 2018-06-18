@@ -15,7 +15,7 @@
 #'@docType data
 #'@format A data.frame object
 #'@source see \code{\link{IsoDataSet-class}}
-#'@name isoCounts
+#'@name isoCountsData
 #'@family IsoDataSet
 #'@author Gabriela A. Merino \email{merino.gabriela33@@gmail.com} and 
 #'Elmer A. Fernandez \email{efernandez@bdmg.com.ar}

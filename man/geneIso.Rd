@@ -3,8 +3,8 @@
 \docType{data}
 \name{geneIso}
 \alias{geneIso}
-\title{An example of isoform-gene relationship specification helpful to demonstrate
-the use of the NBSplice R package.}
+\title{An example of isoform-gene relationship specification helpful to 
+demonstrate the use of the NBSplice R package.}
 \format{A data.frame object}
 \source{
 see \code{\link{IsoDataSet-class}}
@@ -22,10 +22,10 @@ relationship.
 }
 \seealso{
 Other IsoDataSet: \code{\link{IsoDataSet-class}},
-  \code{\link{IsoDataSet}}, \code{\link{NBTest}},
-  \code{\link{buildData}}, \code{\link{buildLowExpIdx}},
-  \code{\link{designMatrix}}, \code{\link{initialize}},
-  \code{\link{isoCounts}}, \code{\link{myIsoDataSet}}
+    \code{\link{IsoDataSet}}, \code{\link{NBTest}},
+    \code{\link{buildData}}, \code{\link{buildLowExpIdx}},
+    \code{\link{designMatrix}}, \code{\link{initialize}},
+    \code{\link{isoCountsData}}, \code{\link{myIsoDataSet}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and 

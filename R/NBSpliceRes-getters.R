@@ -36,7 +36,7 @@ setGeneric(name="results", def=function(object, filter=TRUE){
 #'@name results
 #'@rdname NBSpliceRes-getters
 #'@inheritParams results
-#'@aliases results,IsoDataSet-method
+#'@aliases results,NBSpliceRes-method
 setMethod(f="results", signature="NBSpliceRes", 
 definition=function(object, filter=TRUE){
     if(filter & nrow(object@results)>0){
@@ -66,7 +66,7 @@ setMethod(f="contrast", signature="NBSpliceRes",
 definition=function(object){
     return(object@contrast)
 })
-#'@name lowExpIndex
+#'@name NBSpliceRes-lowExpIndex
 #'@rdname NBSpliceRes-getters
 #'@inheritParams results
 #'@aliases lowExpIndex,NBSpliceRes-method

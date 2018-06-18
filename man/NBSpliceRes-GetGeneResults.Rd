@@ -18,7 +18,7 @@ GetGeneResults(myNBRes, gene, filterLowExpIso = TRUE)
 \item{gene}{Character indicating the gene name.}
 
 \item{filterLowExpIso}{Logical indicating if lower-expression isoforms should
-be filtered out.}
+    be filtered out.}
 }
 \value{
 Data.frame object with gene results.
@@ -44,11 +44,12 @@ myGeneResults<-GetGeneResults(myDSResults, gene)
 \code{\link{NBSpliceRes}}
 
 Other NBSpliceRes: \code{\link{GetDSGenes}},
-  \code{\link{GetDSResults}},
-  \code{\link{NBSpliceRes-class}},
-  \code{\link{NBSpliceRes}}, \code{\link{initialize}},
-  \code{\link{myDSResults}}, \code{\link{plotGeneResults}},
-  \code{\link{plotRatiosDisp}}, \code{\link{plotVolcano}}
+    \code{\link{GetDSResults}},
+    \code{\link{NBSpliceRes-class}},
+    \code{\link{NBSpliceRes-initialize}},
+    \code{\link{NBSpliceRes}}, \code{\link{myDSResults}},
+    \code{\link{plotGeneResults}},
+    \code{\link{plotRatiosDisp}}, \code{\link{plotVolcano}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and Elmer A. 

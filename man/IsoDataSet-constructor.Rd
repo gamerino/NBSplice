@@ -56,10 +56,10 @@ myIsoDataSet<-IsoDataSet(isoCounts, designMatrix, colName, geneIso)
 \code{\link{IsoDataSet-class}}
 
 Other IsoDataSet: \code{\link{IsoDataSet-class}},
-  \code{\link{NBTest}}, \code{\link{buildData}},
-  \code{\link{buildLowExpIdx}}, \code{\link{designMatrix}},
-  \code{\link{geneIso}}, \code{\link{initialize}},
-  \code{\link{isoCounts}}, \code{\link{myIsoDataSet}}
+    \code{\link{NBTest}}, \code{\link{buildData}},
+    \code{\link{buildLowExpIdx}}, \code{\link{designMatrix}},
+    \code{\link{geneIso}}, \code{\link{initialize}},
+    \code{\link{isoCountsData}}, \code{\link{myIsoDataSet}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com}, and Elmer A. 

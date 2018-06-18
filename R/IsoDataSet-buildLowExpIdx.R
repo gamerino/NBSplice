@@ -57,17 +57,18 @@ setMethod(f="buildLowExpIdx", signature=signature(object="IsoDataSet"),
             sep=" "))
     }
     condLevs<-levels(designMatrix[,colName])
-    # if(length(levels)!=2){
-    #     stop(" NBSplice is only implemented for case control comparisons")
-    # }
-    samplesCols<-lapply(1:length(condLevs), function(x){
+    if(length(condLevs)<2){
+        stop(paste("NBSplice needs at least two levels of the ", colName, 
+                    "experimental factor", sep=""))
+    }
+    samplesCols<-lapply(seq_along(condLevs), function(x){
         return(rownames(designMatrix[designMatrix$condition==levels(
             designMatrix$condition)[x],]))
     })
     iso_cpm<-round(iso_cm[,do.call(c,samplesCols)])
     totalC<-round(iso_cm[,paste(do.call(c,samplesCols), "_All", sep="")])
-    idxLowRat<-do.call(c, bplapply(1:nrow(iso_cm), function(x){
-        expAndRat<-do.call(rbind,lapply(1:length(condLevs), function(i){
+    idxLowRat<-do.call(c, bplapply(seq_len(nrow(iso_cm)), function(x){
+        expAndRat<-do.call(rbind,lapply(seq_along(condLevs), function(i){
         dat<-iso_cpm[x,samplesCols[[i]], drop=FALSE]
         ratios<-dat/totalC[x,paste(samplesCols[[i]], "_All", sep="")]
         return(cbind(meanCond=rowMeans(dat), ratCond=min(ratios)))
@@ -85,7 +86,7 @@ setMethod(f="buildLowExpIdx", signature=signature(object="IsoDataSet"),
                         j<-x
                 }else{
                     if(min(expAndRat[,"ratCond"]) < ratioThres){
-			j<-x
+                        j<-x
                     }else{
                         j<-NULL
                     }
@@ -94,7 +95,7 @@ setMethod(f="buildLowExpIdx", signature=signature(object="IsoDataSet"),
 
         return(j)
     }, BPPARAM=BPPARAM))
+    if(is.null(idxLowRat)) idxLowRat<-numeric()
     object@lowExpIndex<-idxLowRat
     return(object)
-
 })

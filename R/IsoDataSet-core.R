@@ -53,13 +53,13 @@ buildData<-function(isoCounts, geneCounts, geneIso, gene, designMatrix,
     iso_cm<-cbind(isoCounts, geneCounts)
     if(!any(colnames(designMatrix)==colName)){
         stop(paste("The design matrix should contain a column called", colName,
-                   sep=" "))
+            sep=" "))
     }
     iso_cm_gen<-iso_cm[which(geneIso[,"gene_id"] == gene),,drop=FALSE]
     iso<-rownames(iso_cm_gen)
     data<-data.frame(samples=rep(rownames(designMatrix), length(iso)), 
         condition=rep(designMatrix[,colName], length(iso)))
-    for (i in 1:(length(iso))){
+    for (i in seq_along(length(iso))){
         data[((i+ (i-1)*(nrow(designMatrix)-1)):(i+ (i-1)*(nrow(
             designMatrix)-1)+nrow(designMatrix)-1)), "iso"]<-iso[i]
     }
@@ -155,7 +155,7 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
             sigma2<-sum(residuals(modl, "pearson")^2)/modl$df.residual
             x<-model.matrix(modl)
             theta<-modl$theta
-            testW<-do.call(rbind,lapply(1:length(iso), function(k){
+            testW<-do.call(rbind,lapply(seq_along(iso), function(k){
                 isof<-iso[k]
                 coef<-which(names(beta) %in% c(paste(colName, contrast[2],
                     sep=""), paste(colName, contrast[2], ":iso", isof, 
@@ -179,10 +179,10 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
                         colnames(aux)[colnames(aux) %in% c("Pr(>F)",
                             "Pr(>Chisq)")]<-"prob"
                 }
-                ratioControl<-exp(sum(as.numeric(beta[c(1,which(names(beta) %in% 
-                    paste("iso", isof, sep="")))])))
-                ratioTreat<-exp(sum(c(as.numeric(beta[c(1,which(names(beta) %in% 
-                    paste("iso", isof, sep="")))]), beta[coef])))
+                ratioControl<-exp(sum(as.numeric(beta[c(1,which(names(
+                    beta) %in% paste("iso", isof, sep="")))])))
+                ratioTreat<-exp(sum(c(as.numeric(beta[c(1,which(names(
+                    beta) %in% paste("iso", isof, sep="")))]), beta[coef])))
                 return(c(ratioControl=ratioControl, ratioTreat=ratioTreat, 
                     odd=sum(beta[coef]), stat=aux[,"stat"], pval=aux[,"prob"]))
             }))
@@ -195,7 +195,7 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
         }
     }else{
         ratioControl<-ratioTreat<-NULL
-        for(i in 1:length(iso)){
+        for(i in seq_along(iso)){
             ratioControl<-c(ratioControl, mean(myData[myData[,colName]== 
                 contrast[1] & myData[, "iso"] == iso[i], "counts"]/ myData[
                 myData[,colName]==contrast[1] & myData[, "iso"] == iso[i],
@@ -213,7 +213,7 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
     isoRes<-cbind(iso=iso,gene=gene, ratioControl=testW[,"ratioControl"], 
         ratioTreat=testW[,"ratioTreat"],theta=theta, odd=testW[,"odd"], 
         stat=testW[,"stat"], pval=testW[,"pval"], genePval=genePval)
-        
+
     colnames(isoRes)[3:4]<-paste("ratio", contrast, sep="_")
     return(isoRes)
 }

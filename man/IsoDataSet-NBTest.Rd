@@ -9,12 +9,12 @@
 \title{Differential splicing analysis.}
 \usage{
 NBTest(object, colName = "condition", test = c("F", "Chisq"),
-  contrast = c(levels(expData(object)[, colName])[1:2]),
-  BPPARAM = bpparam())
+    contrast = c(levels(expData(object)[, colName])[1:2]),
+    BPPARAM = bpparam())
 
 \S4method{NBTest}{IsoDataSet}(object, colName = "condition", test = c("F",
-  "Chisq"), contrast = c(levels(expData(object)[, colName])[1:2]),
-  BPPARAM = bpparam())
+    "Chisq"), contrast = c(levels(expData(object)[, colName])[1:2]),
+    BPPARAM = bpparam())
 }
 \arguments{
 \item{object}{IsoDataSet class object.}
@@ -62,10 +62,10 @@ myDSResults<-NBTest(myIsoDataSet, colName, test)
 \code{\link{IsoDataSet}}
 
 Other IsoDataSet: \code{\link{IsoDataSet-class}},
-  \code{\link{IsoDataSet}}, \code{\link{buildData}},
-  \code{\link{buildLowExpIdx}}, \code{\link{designMatrix}},
-  \code{\link{geneIso}}, \code{\link{initialize}},
-  \code{\link{isoCounts}}, \code{\link{myIsoDataSet}}
+    \code{\link{IsoDataSet}}, \code{\link{buildData}},
+    \code{\link{buildLowExpIdx}}, \code{\link{designMatrix}},
+    \code{\link{geneIso}}, \code{\link{initialize}},
+    \code{\link{isoCountsData}}, \code{\link{myIsoDataSet}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and Elmer A. 

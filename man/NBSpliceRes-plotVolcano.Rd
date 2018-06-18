@@ -11,7 +11,7 @@
 plotVolcano(myNBRes, adjusted = TRUE, p.value = 0.05)
 
 \S4method{plotVolcano}{NBSpliceRes}(myNBRes, adjusted = TRUE,
-  p.value = 0.05)
+    p.value = 0.05)
 }
 \arguments{
 \item{myNBRes}{NBSpliceRes class object.}
@@ -45,11 +45,12 @@ g
 \code{\link{NBSpliceRes}}
 
 Other NBSpliceRes: \code{\link{GetDSGenes}},
-  \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
-  \code{\link{NBSpliceRes-class}},
-  \code{\link{NBSpliceRes}}, \code{\link{initialize}},
-  \code{\link{myDSResults}}, \code{\link{plotGeneResults}},
-  \code{\link{plotRatiosDisp}}
+    \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
+    \code{\link{NBSpliceRes-class}},
+    \code{\link{NBSpliceRes-initialize}},
+    \code{\link{NBSpliceRes}}, \code{\link{myDSResults}},
+    \code{\link{plotGeneResults}},
+    \code{\link{plotRatiosDisp}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and Elmer A. 

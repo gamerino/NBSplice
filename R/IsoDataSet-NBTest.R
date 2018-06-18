@@ -45,8 +45,8 @@
 #'myDSResults<-NBTest(myIsoDataSet, colName, test)
 #'
 setGeneric(name="NBTest", def=function(object, colName="condition", 
-    test=c("F", "Chisq"), contrast=c(levels(expData(object)[,colName])[1:2]), 
-    BPPARAM=bpparam()){
+    test=c("F", "Chisq"), contrast=c(levels(expData(object)[,colName])[
+        seq_len(2)]), BPPARAM=bpparam()){
     standardGeneric("NBTest")
 })
 #'@name NBTest
@@ -55,19 +55,40 @@ setGeneric(name="NBTest", def=function(object, colName="condition",
 #'@inheritParams NBTest
 setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
     definition=function(object, colName="condition", test=c("F", "Chisq"), 
-    contrast=c(levels(expData(object)[,colName])[1:2]), BPPARAM=bpparam()){
+    contrast=c(levels(expData(object)[,colName])[seq_len(2)]), 
+    BPPARAM=bpparam()){
+    if(!test %in% c("F", "Chisq")){
+        stop("The 'test' parameter should be 'F' or 'Chisq'. ")
+    }
+    if(!colName %in% colnames(expData(object)) | ! grepl(colName, 
+        as.character(designFormula(object))[3])){
+        stop("The 'colName' parameter should be one of the design matrix 
+            columns and the same used to built the object.")
+    }
+        
     idxLowRat<-lowExpIndex(object)
+    # if(length(idxLowRat)==0){
+    #     object<-buildLowExpIdx(object)
+    #     idxLowRat<-lowExpIndex(object)
+    # }
     if(length(idxLowRat)==0){
-        object<-buildLowExpIdx(object)
-        idxLowRat<-lowExpIndex(object)
+        warning("The low-expressed isoforms have not been previously
+            identified. Please consider their identification before executing
+                the NBTest function")
     }
     designMatrix<-expData(object)
-    geneIso<-isoGeneRel(object)[-idxLowRat,]
-    geneCounts<-object@geneCounts[-idxLowRat,]
-    isoCounts<-isoCounts(object)[-idxLowRat,]
+    if(length(idxLowRat)>0){
+        geneIso<-isoGeneRel(object)[-idxLowRat,]
+        geneCounts<-object@geneCounts[-idxLowRat,]
+        isoCounts<-isoCounts(object)[-idxLowRat,]
+    }else{
+        geneIso<-isoGeneRel(object)
+        geneCounts<-object@geneCounts
+        isoCounts<-isoCounts(object)
+    }
     genes<-as.character(unique(geneIso[,"gene_id"]))
-    
-    resultsOK<-do.call(rbind, bplapply(1:length(genes), function(j){
+
+    resultsOK<-do.call(rbind, bplapply(seq_along(genes), function(j){
         gene<-genes[j]
         formula<-designFormula(object)
         myData<-buildData(isoCounts, geneCounts, geneIso, gene=gene, 
@@ -76,10 +97,10 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
             test=test, contrast=contrast)
         return(isoRes)
     }, BPPARAM=BPPARAM))
-    
+
     resultsOK<-as.data.frame(resultsOK)
     # resultsOK<-resultsOK[!is.na(resultsOK$pval),]
-    for(i in 3:ncol(resultsOK)){
+    for(i in seq(from=3, to=ncol(resultsOK))){
         resultsOK[,i]<-as.numeric(as.character(resultsOK[,i]))
     }
     resultsOK$geneFDR<-resultsOK$FDR<-NA
@@ -87,22 +108,23 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
         resultsOK[,"pval"]),"pval"], method="fdr")
     resultsOK$geneFDR[!is.na(resultsOK[,"genePval"])]<-p.adjust(resultsOK[
         !is.na(resultsOK[,"genePval"]),"genePval"], method="fdr")
-    rownames(resultsOK)<-1:nrow(resultsOK)
-    
+    rownames(resultsOK)<-seq_len(nrow(resultsOK))
+
     # Add filtered isoforma and genes mean relative expression values
+    if(length(idxLowRat) > 0 ){
     geneIsoF<-isoGeneRel(object)[idxLowRat,]
     geneCountsF<-object@geneCounts[idxLowRat,]
     isoCountsF<-isoCounts(object)[idxLowRat,]
     genesF<-as.character(unique(geneIsoF[,"gene_id"]))
-    resultsF<-do.call(rbind, bplapply(1:length(genesF), function(j){
+    resultsF<-do.call(rbind, bplapply(seq_along(genesF), function(j){
         gene<-genesF[j]
         myData<-buildData(isoCounts=isoCountsF, geneCounts=geneCountsF, 
             geneIso=geneIsoF, gene=gene, designMatrix=designMatrix,
             colName=colName)
         iso<-unique(as.character(myData[,"iso"]))
         ratioControl<-ratioTreat<-NULL
-        
-        for(i in 1:length(iso)){
+
+        for(i in seq_along(iso)){
             ratioControl<-c(ratioControl, mean(myData[myData[,colName]== 
                 contrast[1] & myData[, "iso"] == iso[i], "counts"]/ myData[
                 myData[,colName]==contrast[1] & myData[, "iso"] == iso[i],
@@ -118,33 +140,32 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
         theta<-genePval<-NA
         isoRes<-cbind(iso=iso,gene=gene, ratioControl=testW[,"ratioControl"], 
             ratioTreat=testW[,"ratioTreat"])
-        colnames(isoRes)[3:4]<-paste("ratio", contrast, sep="_")
+        colnames(isoRes)[c(3,4)]<-paste("ratio", contrast, sep="_")
         return(isoRes)}, BPPARAM=BPPARAM))
     resultsF<-as.data.frame(resultsF)
-    for(i in 3:4){
+    for(i in c(3,4)){
         resultsF[,i]<-as.numeric(as.character(resultsF[,i]))
     }
     resultsF$theta<-NA
     resultsF$stat<-resultsF$odd<-NA
     resultsF$FDR<-resultsF$geneFDR<-resultsF$genePval<-resultsF$pval<-NA
     #join
-    for(i in 1:2){
+    for(i in c(1,2)){
         resultsOK[,i]<-as.character(resultsOK[,i])            
         resultsF[,i]<-as.character(resultsF[,i])
     }
     resultsAll<-rbind(resultsOK, resultsF)
-    
+    }else{resultsAll<-resultsOK}
     rownames(resultsAll)<-as.character(resultsAll[,"iso"])
-    
+
     iso_cm<-isoCounts(object)
     resultsAll<-resultsAll[rownames(iso_cm),]
-    rownames(resultsAll)<-1:nrow(resultsAll)
-    
+    rownames(resultsAll)<-seq_len(nrow(resultsAll))
     genes<-unique(resultsAll[,"gene"])
     disp<-do.call(c,lapply(genes, function(gene){
         if(any(!is.na(resultsAll[resultsAll[,"gene"]==gene,"theta"]))){
-            disp<-unique(resultsAll[resultsAll[,"gene"]==gene & !is.na(resultsAll[,
-                "theta"]),"theta"])
+            disp<-unique(resultsAll[resultsAll[,"gene"]==gene & !is.na(
+                resultsAll[, "theta"]),"theta"])
         }else{
             disp<-NA}
         return(disp)

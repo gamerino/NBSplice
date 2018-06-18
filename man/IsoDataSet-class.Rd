@@ -14,22 +14,23 @@ This S4 class represents a data set containing isoforms expresion in R.
 
 \item{\code{geneCounts}}{Matrix with expression values at the gene level}
 
-\item{\code{colData}}{Data.frame with experiment information. Its rows should be 
-the columns of the counts data.frame}
+\item{\code{colData}}{Data.frame with experiment information. Its rows should 
+be the columns of the counts data.frame}
 
 \item{\code{isoGeneRel}}{Data.frame specifying the isoform-gene relationship}
 
 \item{\code{design}}{Formula to be used in the GLM fit and tests}
 
-\item{\code{lowExpIndex}}{Numeric indicating the positions of low expressed isoforms}
+\item{\code{lowExpIndex}}{Numeric indicating the positions of low expressed 
+isoforms}
 }}
 
 \section{Features}{
- 
+
 \enumerate{
- \item Discover differential modifications in the splicing patterns. 
- \item Detect and quantify isoform relative expression changes.
- \item Combine the results of both gene and isoform levels analysis.
+    \item Discover differential modifications in the splicing patterns. 
+    \item Detect and quantify isoform relative expression changes.
+    \item Combine the results of both gene and isoform levels analysis.
 }
 }
 
@@ -74,10 +75,10 @@ myDSResults<-NBTest(myIsoDataSet, colName, test)
 }
 \seealso{
 Other IsoDataSet: \code{\link{IsoDataSet}},
-  \code{\link{NBTest}}, \code{\link{buildData}},
-  \code{\link{buildLowExpIdx}}, \code{\link{designMatrix}},
-  \code{\link{geneIso}}, \code{\link{initialize}},
-  \code{\link{isoCounts}}, \code{\link{myIsoDataSet}}
+    \code{\link{NBTest}}, \code{\link{buildData}},
+    \code{\link{buildLowExpIdx}}, \code{\link{designMatrix}},
+    \code{\link{geneIso}}, \code{\link{initialize}},
+    \code{\link{isoCountsData}}, \code{\link{myIsoDataSet}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and Elmer A.

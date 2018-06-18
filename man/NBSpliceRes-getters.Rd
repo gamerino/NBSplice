@@ -6,12 +6,12 @@
 \alias{results}
 \alias{results-methods}
 \alias{results}
-\alias{results,IsoDataSet-method}
+\alias{results,NBSpliceRes-method}
 \alias{contrast}
 \alias{contrast-methods}
 \alias{contrast}
 \alias{contrast,NBSpliceRes-method}
-\alias{lowExpIndex}
+\alias{NBSpliceRes-lowExpIndex}
 \alias{lowExpIndex,NBSpliceRes-method}
 \alias{disp}
 \alias{disp-methods}

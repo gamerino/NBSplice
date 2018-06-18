@@ -54,22 +54,21 @@ setMethod(f="plotVolcano", signature="NBSpliceRes", definition=function(
         if(adjusted){
             DSDF[,"DiffSpl"]<-DSDF[,"geneFDR"] < p.value & !is.na( DSDF[,
                 "geneFDR"])
-            g<-ggplot(DSDF, aes(x=ratDif, y=-log10(FDR), color=DiffSpl))+ 
-            geom_point()+labs(x=paste(condVars[2], "-", condVars[1], sep=""))    
-        }else{        
+            g<-ggplot(DSDF, aes(x=ratDif, y=-log10(FDR), color=DiffSpl))+
+            geom_point()+labs(x=paste(condVars[2], "-", condVars[1], sep=""))
+        }else{ 
             DSDF[,"DiffSpl"]<-DSDF[,"genePval"] < p.value & !is.na( DSDF[,
                 "genePval"])
-            g<-ggplot(DSDF, aes(x=ratDif, y=-log10(pval), color=DiffSpl))+ 
-            geom_point()+labs(x=paste(condVars[2], "-", condVars[1], sep=""))    
+            g<-ggplot(DSDF, aes(x=ratDif, y=-log10(pval), color=DiffSpl))+
+            geom_point()+labs(x=paste(condVars[2], "-", condVars[1], sep=""))
         }
         g<-g+theme(panel.background=element_rect(fill="white", color="black"),
         legend.key=element_rect( fill="white", color="white"), 
-        panel.grid.major=element_line(color="lightgoldenrod3"), 
+        panel.grid.major=element_line(color="lightgoldenrod3"),
         panel.grid.minor=element_line(color="tomato", linetype = "dashed"),
         legend.text = element_text(size = 12),legend.title = element_text(
         size = 14, face = "bold"), axis.text=element_text(size=12), 
         plot.title=element_text(size=14, hjust=0.5), axis.title=element_text(
         size=14))+scale_color_manual(values=c("TRUE"="green", "FALSE"="red"))
-        
         return(g)
 })

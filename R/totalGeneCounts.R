@@ -42,7 +42,7 @@ totalGeneCounts<-function(isoCounts, geneIso, BPPARAM=bpparam()){
     isoCounts<-cpm(isoCounts)
     genes<-as.character(unique(geneIso[,"gene_id"]))
 
-    allCounts<-do.call(rbind,bplapply(1:length(genes), 
+    allCounts<-do.call(rbind,bplapply(seq_along(genes), 
     function(x){
         gene_cm<-isoCounts[as.character(geneIso[,"isoform_id"][geneIso[,
             "gene_id"] == genes[x]]), , drop=FALSE]  

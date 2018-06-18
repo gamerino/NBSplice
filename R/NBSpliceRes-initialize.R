@@ -3,6 +3,7 @@
 #'@description
 #'\code{initialize} creates an NBSpliceRes object
 #' 
+#'@param .Object NBSpliceRes class object.
 #'@param results Data.frame with NBTest results of expressed isoforms.
 #'@param lowExpIndex Numeric indicating the positions of low expressed isoforms.
 #'@param contrast Character indicating the contrast used for NBTest.
@@ -13,7 +14,7 @@
 #'@include NBSpliceRes.R
 #'@exportMethod initialize
 #'@docType methods
-#'@name initialize
+#'@name NBSpliceRes-initialize
 #'@rdname NBSpliceRes-initialize
 #'@import BiocParallel
 #'@importMethodsFrom BiocParallel bplapply

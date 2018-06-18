@@ -6,12 +6,13 @@
 \alias{plotRatiosDisp-methods}
 \alias{plotRatiosDisp}
 \alias{plotRatiosDisp,NBSpliceRes-method}
-\title{Plot the dispersion of isoform's relative expression for significant genes.}
+\title{Plot the dispersion of isoform's relative expression for significant 
+genes.}
 \usage{
 plotRatiosDisp(myNBRes, adjusted = TRUE, p.value = 0.05)
 
 \S4method{plotRatiosDisp}{NBSpliceRes}(myNBRes, adjusted = TRUE,
-  p.value = 0.05)
+    p.value = 0.05)
 }
 \arguments{
 \item{myNBRes}{NBSpliceRes class object.}
@@ -45,11 +46,11 @@ g
 \code{\link{NBSpliceRes}}
 
 Other NBSpliceRes: \code{\link{GetDSGenes}},
-  \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
-  \code{\link{NBSpliceRes-class}},
-  \code{\link{NBSpliceRes}}, \code{\link{initialize}},
-  \code{\link{myDSResults}}, \code{\link{plotGeneResults}},
-  \code{\link{plotVolcano}}
+    \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
+    \code{\link{NBSpliceRes-class}},
+    \code{\link{NBSpliceRes-initialize}},
+    \code{\link{NBSpliceRes}}, \code{\link{myDSResults}},
+    \code{\link{plotGeneResults}}, \code{\link{plotVolcano}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and Elmer A. 

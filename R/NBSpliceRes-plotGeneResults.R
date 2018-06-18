@@ -9,10 +9,6 @@
 #'be filtered out.
 #'@param filterNotSignificant Logical indicating if not significant 
 #'isoforms should be filtered out. 
-#'@param filterNotSignificant Logical indicating if not significant 
-#'isoforms should be filtered out. 
-#'@param filterNotSignificant Logical indicating if not significant 
-#'isoforms should be filtered out. 
 #'@param adjusted Logical indicating if adjusted p values should be used.
 #'@param p.value Numeric value between 0 and 1 giving the required family-wise
 #'error rate or false discovery rate.
@@ -80,14 +76,14 @@ setMethod(f="plotGeneResults", signature="NBSpliceRes", definition=function(
         
         }
         
-        rsh<-melt(DSDF[, c(1:4)], id.vars=c("iso", "gene"))
+        rsh<-melt(DSDF[, seq_len(4)], id.vars=c("iso", "gene"))
         condVars<-colnames(DSDF)[grep("ratio", colnames(DSDF))]
         value<-variable<-iso<-NULL
         g<-ggplot(rsh, aes(x=variable, y=value,fill=iso))
         if(group){
             g<-g+geom_bar(stat="identity")          
         }else{
-            g<-g+geom_bar(aes(group=iso),stat="identity", position="dodge")          
+            g<-g+geom_bar(aes(group=iso),stat="identity", position="dodge")
         }
         g<-g+labs(x="Condition", y="Relative expression",fill="Isoform")
         g<-g+theme(panel.background=element_rect(fill="white", color="black"),

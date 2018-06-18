@@ -11,7 +11,7 @@
 #'@include NBSpliceRes-show.R
 #'@exportMethod print
 #'@docType methods
-#'@name print
+#'@name NBSpliceRes-print
 #'@rdname NBSpliceRes-print
 #'@aliases print,NBSpliceRes-method
 #'@note see full example in \code{\link{NBSpliceRes-class}}

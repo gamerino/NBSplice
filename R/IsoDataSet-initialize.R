@@ -56,8 +56,8 @@ BPPARAM=bpparam()){
     if(nargs() >=3){
     ## Check isoGeneRel
     if(!any(colnames(geneIso) =="isoform_id")){
-        stop("The geneIso data.frame must be two columns called gene_id and
-        isoform_id")
+        stop("The geneIso data.frame must be two columns called 'gene_id' and
+            'isoform_id'. ")
     }
     if(!all(rownames(isoCounts) %in% geneIso[,"isoform_id"])){
         stop("The geneIso object and the isoCounts object should contain the
@@ -66,7 +66,7 @@ BPPARAM=bpparam()){
     # counts
         if(is.data.frame(isoCounts)){
             isoCounts<-as.matrix(isoCounts)
-            for(i in 1:ncol(isoCounts)){
+            for(i in seq_along(isoCounts)){
                 isoCounts[,i]<-as.numeric(as.character(isoCounts[,i]))
             }
         }
@@ -76,7 +76,7 @@ BPPARAM=bpparam()){
         .Object@counts<-isoCounts
         #sort the geneIso with the rownmaes of IsoCounts
         if(any(rownames(isoCounts) != rownames(geneIso))){
-        idx<-do.call(c, bplapply(1:nrow(isoCounts), function(i){
+        idx<-do.call(c, bplapply(seq_len(nrow(isoCounts)), function(i){
             return(which(rownames(isoCounts)[i] == geneIso[, "isoform_id"]))
         },BPPARAM=BPPARAM))
         geneIso<-geneIso[idx,]
@@ -105,5 +105,4 @@ BPPARAM=bpparam()){
     ##Check the object's validity
     validObject(.Object)
     return(.Object)
-    
 })

@@ -21,10 +21,10 @@ Each row of this data.frame specifies one experiment sample.
 }
 \seealso{
 Other IsoDataSet: \code{\link{IsoDataSet-class}},
-  \code{\link{IsoDataSet}}, \code{\link{NBTest}},
-  \code{\link{buildData}}, \code{\link{buildLowExpIdx}},
-  \code{\link{geneIso}}, \code{\link{initialize}},
-  \code{\link{isoCounts}}, \code{\link{myIsoDataSet}}
+    \code{\link{IsoDataSet}}, \code{\link{NBTest}},
+    \code{\link{buildData}}, \code{\link{buildLowExpIdx}},
+    \code{\link{geneIso}}, \code{\link{initialize}},
+    \code{\link{isoCountsData}}, \code{\link{myIsoDataSet}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and 

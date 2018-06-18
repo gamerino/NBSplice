@@ -10,7 +10,7 @@
 #'@include NBSpliceRes-getters.R
 #'@exportMethod show
 #'@docType methods
-#'@name show
+#'@name NBSpliceRes-show
 #'@rdname NBSpliceRes-show
 #'@aliases show,NBSpliceRes-method
 #'@note see full example in \code{\link{NBSpliceRes-class}}
@@ -27,7 +27,7 @@ definition=function(object){
     cat("NBSpliceRes data.frame \n")
     cat("Isoform Counts: \n", sep=" ")
     if(nrow(results(object))>0){
-    cat("\t"); show(results(object)[1:5,]);cat("\n") 
+    cat("\t"); show(results(object)[seq_len(5),]);cat("\n") 
     }else{
     cat("\t"); show(results(object));cat("\n") 
     }

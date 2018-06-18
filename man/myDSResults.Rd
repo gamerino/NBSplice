@@ -18,11 +18,11 @@ An NBSpliceRes object built with the package example dataset.
 }
 \seealso{
 Other NBSpliceRes: \code{\link{GetDSGenes}},
-  \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
-  \code{\link{NBSpliceRes-class}},
-  \code{\link{NBSpliceRes}}, \code{\link{initialize}},
-  \code{\link{plotGeneResults}},
-  \code{\link{plotRatiosDisp}}, \code{\link{plotVolcano}}
+    \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
+    \code{\link{NBSpliceRes-class}},
+    \code{\link{NBSpliceRes-initialize}},
+    \code{\link{NBSpliceRes}}, \code{\link{plotGeneResults}},
+    \code{\link{plotRatiosDisp}}, \code{\link{plotVolcano}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and 

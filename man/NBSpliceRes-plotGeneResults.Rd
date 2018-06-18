@@ -6,15 +6,16 @@
 \alias{plotGeneResults-methods}
 \alias{plotGeneResults}
 \alias{plotGeneResults,NBSpliceRes-method}
-\title{Method to obtain isoform's relative expression barplot for an specific gene.}
+\title{Method to obtain isoform's relative expression barplot for an specific
+gene.}
 \usage{
 plotGeneResults(myNBRes, gene, filterLowExpIso = TRUE,
-  filterNotSignificant = TRUE, adjusted = TRUE, p.value = 0.05,
-  group = TRUE)
+    filterNotSignificant = TRUE, adjusted = TRUE, p.value = 0.05,
+    group = TRUE)
 
 \S4method{plotGeneResults}{NBSpliceRes}(myNBRes, gene, filterLowExpIso = TRUE,
-  filterNotSignificant = TRUE, adjusted = TRUE, p.value = 0.05,
-  group = TRUE)
+    filterNotSignificant = TRUE, adjusted = TRUE, p.value = 0.05,
+    group = TRUE)
 }
 \arguments{
 \item{myNBRes}{NBSpliceRes class object.}
@@ -33,12 +34,6 @@ isoforms should be filtered out.}
 error rate or false discovery rate.}
 
 \item{group}{Logical indicating if isoforms bars should be stacked or not}
-
-\item{filterNotSignificant}{Logical indicating if not significant 
-isoforms should be filtered out.}
-
-\item{filterNotSignificant}{Logical indicating if not significant 
-isoforms should be filtered out.}
 }
 \value{
 A ggplot object.
@@ -73,11 +68,11 @@ g
 \code{\link{NBSpliceRes}}
 
 Other NBSpliceRes: \code{\link{GetDSGenes}},
-  \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
-  \code{\link{NBSpliceRes-class}},
-  \code{\link{NBSpliceRes}}, \code{\link{initialize}},
-  \code{\link{myDSResults}}, \code{\link{plotRatiosDisp}},
-  \code{\link{plotVolcano}}
+    \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
+    \code{\link{NBSpliceRes-class}},
+    \code{\link{NBSpliceRes-initialize}},
+    \code{\link{NBSpliceRes}}, \code{\link{myDSResults}},
+    \code{\link{plotRatiosDisp}}, \code{\link{plotVolcano}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and Elmer A. 

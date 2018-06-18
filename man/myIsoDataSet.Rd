@@ -19,10 +19,10 @@ An IsoDataSet object built with the package example dataset.
 }
 \seealso{
 Other IsoDataSet: \code{\link{IsoDataSet-class}},
-  \code{\link{IsoDataSet}}, \code{\link{NBTest}},
-  \code{\link{buildData}}, \code{\link{buildLowExpIdx}},
-  \code{\link{designMatrix}}, \code{\link{geneIso}},
-  \code{\link{initialize}}, \code{\link{isoCounts}}
+    \code{\link{IsoDataSet}}, \code{\link{NBTest}},
+    \code{\link{buildData}}, \code{\link{buildLowExpIdx}},
+    \code{\link{designMatrix}}, \code{\link{geneIso}},
+    \code{\link{initialize}}, \code{\link{isoCountsData}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and 

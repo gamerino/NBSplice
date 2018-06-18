@@ -41,11 +41,11 @@ myNewDSResults<-NBSpliceRes(myResults, myLowExpIdx, myContrast, myDispersion)
 \code{\link{NBSpliceRes-class}}
 
 Other NBSpliceRes: \code{\link{GetDSGenes}},
-  \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
-  \code{\link{NBSpliceRes-class}},
-  \code{\link{initialize}}, \code{\link{myDSResults}},
-  \code{\link{plotGeneResults}},
-  \code{\link{plotRatiosDisp}}, \code{\link{plotVolcano}}
+    \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
+    \code{\link{NBSpliceRes-class}},
+    \code{\link{NBSpliceRes-initialize}},
+    \code{\link{myDSResults}}, \code{\link{plotGeneResults}},
+    \code{\link{plotRatiosDisp}}, \code{\link{plotVolcano}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com}, and Elmer A. 

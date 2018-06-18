@@ -62,7 +62,6 @@
 setClass(Class="IsoDataSet", slots=list(counts ="matrix", geneCounts="matrix",
     colData="data.frame", isoGeneRel="data.frame", design="formula", 
     lowExpIndex="numeric"), validity=function(object){
-
     ## Check counts matrix
     expMat<-isoCounts(object)
     if(!is.matrix(expMat)){
@@ -79,10 +78,9 @@ setClass(Class="IsoDataSet", slots=list(counts ="matrix", geneCounts="matrix",
         stop("The argument 'colData' should be a data.frame")
     }
     if(any(colnames(expMat) != rownames(colDataM))){
-        stop("The column names of counts and the row names of geneCounts must be 
-            the same")
+        stop("The column names of counts and the row names of geneCounts must
+            be the same")
     }
-    
 }, prototype=list(
     counts =matrix(ncol=0, nrow=0),
     geneCounts=matrix(ncol=0, nrow=0), 

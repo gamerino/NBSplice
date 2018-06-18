@@ -92,8 +92,8 @@ setClass(Class="NBSpliceRes", slots=list(results ="data.frame",
     if(!is.numeric(dispersion)){
         stop("The dispersion object should be a numeric")
     }
-        
-     }, prototype=list(
+
+    }, prototype=list(
     results =as.data.frame(matrix(ncol=0, nrow=0)),
     lowExpIndex=numeric(),
     contrast=character(),

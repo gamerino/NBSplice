@@ -1,7 +1,7 @@
 Package: NBSplice
 Type: Package
-Version: 1.0.3
-Date: 2018-03-21
+Version: 0.99.0
+Date: 2018-06-15
 Title: Negative Binomial Models to detect Differential Splicing
 Author: Gabriela A. Merino and Elmer A. Fernandez
 Maintainer: Gabriela Merino <merino.gabriela33@gmail.com>
@@ -12,7 +12,7 @@ Description: The package proposes a differential splicing evaluation method
 URL: http://www.bdmg.com.ar
 License: GPL (>=2)
 Depends:
-    R (>= 3.4.1),
+    R (>= 3.5),
     methods
 Imports:
     edgeR,
@@ -23,7 +23,11 @@ Imports:
     BiocParallel,
     ggplot2,
     reshape2
-Collate: 
+Suggests:
+    knitr,
+    RUnit,
+    BiocGenerics
+Collate:
     'NBSplice-package.R'
     'IsoDataSet.R'
     'IsoDataSet-getters.R'
@@ -52,8 +56,7 @@ Collate:
     'NBSplice-designMatrix.R'
     'NBSplice-myIsoDataSet.R'
     'NBSplice-myDSResults.R'
-biocViews: Software, Statistical Method, Alternative Splicing, Regression,
-    Differential Expression, Differential Splicing, RNASeq
-RoxygenNote: 6.0.1
+biocViews: Software, StatisticalMethod, AlternativeSplicing, Regression,
+    DifferentialExpression, DifferentialSplicing, RNASeq
 VignetteBuilder: knitr
-
+RoxygenNote: 6.0.1

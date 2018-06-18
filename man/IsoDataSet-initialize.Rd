@@ -7,7 +7,7 @@
 \title{IsoDataSet object constructor.}
 \usage{
 \S4method{initialize}{IsoDataSet}(.Object, isoCounts, experimentData, colName,
-  geneIso, BPPARAM = bpparam())
+    geneIso, BPPARAM = bpparam())
 }
 \arguments{
 \item{.Object}{IsoDataSet class object.}
@@ -59,10 +59,10 @@ myIsoDataSet<-IsoDataSet(isoCounts, designMatrix, colName, geneIso)
 \code{\link{IsoDataSet}}
 
 Other IsoDataSet: \code{\link{IsoDataSet-class}},
-  \code{\link{IsoDataSet}}, \code{\link{NBTest}},
-  \code{\link{buildData}}, \code{\link{buildLowExpIdx}},
-  \code{\link{designMatrix}}, \code{\link{geneIso}},
-  \code{\link{isoCounts}}, \code{\link{myIsoDataSet}}
+    \code{\link{IsoDataSet}}, \code{\link{NBTest}},
+    \code{\link{buildData}}, \code{\link{buildLowExpIdx}},
+    \code{\link{designMatrix}}, \code{\link{geneIso}},
+    \code{\link{isoCountsData}}, \code{\link{myIsoDataSet}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and Elmer A. 

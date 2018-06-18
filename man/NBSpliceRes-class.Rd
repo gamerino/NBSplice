@@ -12,7 +12,8 @@ This S4 class represents a data set containing NBTest results results.
 \describe{
 \item{\code{results}}{Data.frame with NBTest results of expressed isoforms.}
 
-\item{\code{lowExpIndex}}{Numeric indicating the positions of low expressed isoforms.}
+\item{\code{lowExpIndex}}{Numeric indicating the positions of low expressed 
+    isoforms.}
 
 \item{\code{contrast}}{Character indicating the contrast used for NBTest.}
 
@@ -20,11 +21,11 @@ This S4 class represents a data set containing NBTest results results.
 }}
 
 \section{Features}{
- 
+
 \enumerate{
- \item Explore differential splicing occurrence. 
- \item Explore isoform relative expression an its changes.
- \item Combine the results of both gene and isoform levels analysis.
+    \item Explore differential splicing occurrence. 
+    \item Explore isoform relative expression an its changes.
+    \item Combine the results of both gene and isoform levels analysis.
 }
 }
 
@@ -71,10 +72,11 @@ myGeneResults<-GetGeneResults(myDSResults, gene)
 }
 \seealso{
 Other NBSpliceRes: \code{\link{GetDSGenes}},
-  \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
-  \code{\link{NBSpliceRes}}, \code{\link{initialize}},
-  \code{\link{myDSResults}}, \code{\link{plotGeneResults}},
-  \code{\link{plotRatiosDisp}}, \code{\link{plotVolcano}}
+    \code{\link{GetDSResults}}, \code{\link{GetGeneResults}},
+    \code{\link{NBSpliceRes-initialize}},
+    \code{\link{NBSpliceRes}}, \code{\link{myDSResults}},
+    \code{\link{plotGeneResults}},
+    \code{\link{plotRatiosDisp}}, \code{\link{plotVolcano}}
 }
 \author{
 Gabriela A. Merino \email{merino.gabriela33@gmail.com} and Elmer A.
