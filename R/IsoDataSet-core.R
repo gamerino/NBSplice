@@ -59,7 +59,7 @@ buildData<-function(isoCounts, geneCounts, geneIso, gene, designMatrix,
     iso<-rownames(iso_cm_gen)
     data<-data.frame(samples=rep(rownames(designMatrix), length(iso)), 
         condition=rep(designMatrix[,colName], length(iso)))
-    for (i in seq_along(length(iso))){
+    for (i in seq_along(iso)){
         data[((i+ (i-1)*(nrow(designMatrix)-1)):(i+ (i-1)*(nrow(
             designMatrix)-1)+nrow(designMatrix)-1)), "iso"]<-iso[i]
     }
@@ -119,11 +119,11 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
     if(length(levels(myData[,"iso"]))> 1 & all(myData[,"all"] > 0) & !(all(
         myData[,"counts"] ==(myData[,"all"] -myData[,"counts"])))){
 #             modl<-tryCatch(glm.nb(formula,
-            modl<-tryCatch(glm.nb(counts~condition+iso+condition:iso, 
-
+            modl<-suppressWarnings(
+                tryCatch(glm.nb(counts~condition+iso+condition:iso, 
                 offset=log(myData[,"all"]), 
                 link="log", data=myData, control=glm.control()),
-                error=function(cond){FALSE})
+                error=function(cond){FALSE}))
             if(is.logical(modl)){   
                 converged<-modl 
             }else{
@@ -134,10 +134,11 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
             myData[,"counts"] == (myData[,"all"] -myData[,"counts"])))){
                 form<-as.formula(paste("counts~", colName))
 #                 modl<-tryCatch( glm.nb(form, offset=log(
-                modl<-tryCatch( glm.nb(counts~condition, offset=log(
+                modl<-suppressWarnings(
+                    tryCatch( glm.nb(counts~condition, offset=log(
 
                     myData[,"all"]), link="log", data=myData, 
-                    control=glm.control()), error=function(cond){FALSE})
+                    control=glm.control()), error=function(cond){FALSE}))
             if(is.logical(modl)){
                 converged<-modl
             }else{

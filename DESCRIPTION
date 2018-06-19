@@ -1,7 +1,7 @@
 Package: NBSplice
 Type: Package
-Version: 0.99.0
-Date: 2018-06-15
+Version: 0.99.1
+Date: 2018-06-19
 Title: Negative Binomial Models to detect Differential Splicing
 Author: Gabriela A. Merino and Elmer A. Fernandez
 Maintainer: Gabriela Merino <merino.gabriela33@gmail.com>

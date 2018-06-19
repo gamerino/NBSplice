@@ -18,8 +18,9 @@ output:
 bibliography: library.bib
 vignette: >
     %\VignetteIndexEntry{NBSplice-vignette}
-    %\VignetteEngine{knitr::knitr}
+    %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding[utf8]{inputenc}
+    %\usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, echo=FALSE, results="hide"}

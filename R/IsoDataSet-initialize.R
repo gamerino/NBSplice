@@ -66,7 +66,7 @@ BPPARAM=bpparam()){
     # counts
         if(is.data.frame(isoCounts)){
             isoCounts<-as.matrix(isoCounts)
-            for(i in seq_along(isoCounts)){
+            for(i in seq_len(ncol(isoCounts))){
                 isoCounts[,i]<-as.numeric(as.character(isoCounts[,i]))
             }
         }
@@ -92,7 +92,7 @@ BPPARAM=bpparam()){
         # design slot
         .Object@design<-as.formula(paste("counts~", colName, "+iso+", colName, 
             ":iso", sep=""))
-        .Object@lowExpIndex<-numeric()
+        .Object@lowExpIndex<-integer()
     }else{
 
         .Object@counts<-matrix(ncol=0, nrow=0)
@@ -100,7 +100,7 @@ BPPARAM=bpparam()){
         .Object@colData<-data.frame()
         .Object@isoGeneRel<-data.frame()
         .Object@design<-formula()
-        .Object@lowExpIndex<-numeric()
+        .Object@lowExpIndex<-integer()
     }    
     ##Check the object's validity
     validObject(.Object)

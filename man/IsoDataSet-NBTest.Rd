@@ -9,11 +9,11 @@
 \title{Differential splicing analysis.}
 \usage{
 NBTest(object, colName = "condition", test = c("F", "Chisq"),
-    contrast = c(levels(expData(object)[, colName])[1:2]),
+    contrast = c(levels(expData(object)[,colName])[seq_len(2)]),
     BPPARAM = bpparam())
 
 \S4method{NBTest}{IsoDataSet}(object, colName = "condition", test = c("F",
-    "Chisq"), contrast = c(levels(expData(object)[, colName])[1:2]),
+    "Chisq"), contrast = c(levels(expData(object)[,colName])[seq_len(2)]),
     BPPARAM = bpparam())
 }
 \arguments{
