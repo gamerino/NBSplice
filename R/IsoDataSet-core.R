@@ -116,6 +116,9 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
     iso<-levels(myData[, "iso"])
     myData[,"counts"]<-round(myData[,"counts"])
     myData[,"all"]<-round(myData[,"all"])
+    myData<-myData[as.character(myData[, "condition"]) %in% contrast, ]
+    myData[,"condition"]<-factor(as.character(myData[, "condition"]), 
+        levels=contrast)
     if(length(levels(myData[,"iso"]))> 1 & all(myData[,"all"] > 0) & !(all(
         myData[,"counts"] ==(myData[,"all"] -myData[,"counts"])))){
 #             modl<-tryCatch(glm.nb(formula,

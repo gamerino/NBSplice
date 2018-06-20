@@ -1,0 +1,4 @@
+Changes in version 0.99.4
+    * CODE: Modification in the fitModel function to correct the estimations 
+    with contrasts specified by the user
+--------------------------------------------------------------
