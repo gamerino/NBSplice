@@ -6,8 +6,9 @@ The `NBSplice` R package allows the evaluation of differential gene splicing thr
 To install and load the `NBSplice` package in R:
 
 ```r
-library("devtools")
-install_github("gamerino/NBSplice")
+## try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite("NBSplice")
 library("NBSplice")
 ```
 

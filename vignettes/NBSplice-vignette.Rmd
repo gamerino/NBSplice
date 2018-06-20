@@ -28,20 +28,14 @@ knitr::opts_chunk$set(tidy=FALSE, cache=TRUE, dev="png", message=FALSE,
     error=FALSE, warning=TRUE)
 ```
 # NBSplice installation
-`NBSplice` is an R package sitting on GitHub. You could download it from the 
-repository and then use `R CMD install`. Another easy way to install it is by 
-using the `devtools` package. You can install it from CRAN doing:
+`NBSplice` is an R package sitting on Bioconductor. You could download the 
+source file from the Bioconductor site (http://bioconductor.org/) and 
+then use `R CMD install`. Another easy way to install it is by doing:
 
-```{r installDev, eval=FALSE}
-install.packages("devtools")
-```
-Then, you need to load `devtools`:
-```{r libDev, eval=FALSE}
-library(devtools)
-```
-Now, you just use the `install_github("author/package")` command:
-```{r install, eval=FALSE}
-install_github("gamerino/NBSplice")
+```{r bioC, eval=FALSE}
+## try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite("NBSplice")
 ```
 
 # Analysis workflow

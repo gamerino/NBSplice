@@ -159,10 +159,10 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">NBSplice-vignette</h1>
 <h4 class="author"><em>Gabriela A. Merino and Elmer A. Fernandez</em></h4>
-<h4 class="date"><em>19 junio 2018</em></h4>
+<h4 class="date"><em>20 junio 2018</em></h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-<p>NBSplice is an R package that uses isoform expression counts to evaluate differential splicing by means of generalized linear models at the gene level. The package allows the estimation of differences between isoforms’ relative expression to infer changes in alternative splicing patterns. This vignette explains the use of the package in a typical analysis workflow. NBSplice package version: 0.99.1</p>
+<p>NBSplice is an R package that uses isoform expression counts to evaluate differential splicing by means of generalized linear models at the gene level. The package allows the estimation of differences between isoforms’ relative expression to infer changes in alternative splicing patterns. This vignette explains the use of the package in a typical analysis workflow. NBSplice package version: 0.99.3</p>
 </div>
 
 </div>
@@ -197,12 +197,10 @@ $(document).ready(function () {
 
 <div id="nbsplice-installation" class="section level1">
 <h1>NBSplice installation</h1>
-<p><code>NBSplice</code> is an R package sitting on GitHub. You could download it from the repository and then use <code>R CMD install</code>. Another easy way to install it is by using the <code>devtools</code> package. You can install it from CRAN doing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</code></pre></div>
-<p>Then, you need to load <code>devtools</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)</code></pre></div>
-<p>Now, you just use the <code>install_github(&quot;author/package&quot;)</code> command:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install_github</span>(<span class="st">&quot;gamerino/NBSplice&quot;</span>)</code></pre></div>
+<p><code>NBSplice</code> is an R package sitting on Bioconductor. You could download the source file from the Bioconductor site (<a href="http://bioconductor.org/" class="uri">http://bioconductor.org/</a>) and then use <code>R CMD install</code>. Another easy way to install it is by doing:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## try http:// if https:// URLs are not supported
+<span class="kw">source</span>(<span class="st">&quot;https://bioconductor.org/biocLite.R&quot;</span>)
+<span class="kw">biocLite</span>(<span class="st">&quot;NBSplice&quot;</span>)</code></pre></div>
 </div>
 <div id="analysis-workflow" class="section level1">
 <h1>Analysis workflow</h1>
@@ -304,7 +302,7 @@ myIsoDataSet&lt;-<span class="kw">IsoDataSet</span>(isoCounts, designMatrix, col
 ## 
 ## Formula: 
 ##  counts ~ condition + iso + condition:iso
-## &lt;environment: 0x7fab5ca19340&gt;</code></pre>
+## &lt;environment: 0x7ffe130fea38&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">isoCounts</span>(myIsoDataSet))</code></pre></div>
 <pre><code>##                      C1R1      C1R2     C1R3     C1R4     C2R1      C2R2
 ## ENST00000358244  0.000000   0.00000  0.00000  0.00000   0.0000   0.00000
@@ -533,7 +531,7 @@ T_j=\min \{ \frac{I_j p-value{(m)j}}{m}\}
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
 <pre><code>## R version 3.5.0 (2018-04-23)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-## Running under: macOS High Sierra 10.13.4
+## Running under: macOS High Sierra 10.13.5
 ## 
 ## Matrix products: default
 ## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
@@ -546,7 +544,7 @@ T_j=\min \{ \frac{I_j p-value{(m)j}}{m}\}
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] NBSplice_0.99.1
+## [1] NBSplice_0.99.3
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] zip_1.0.0           Rcpp_0.12.17        mppa_1.0           
