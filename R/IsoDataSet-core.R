@@ -59,10 +59,13 @@ buildData<-function(isoCounts, geneCounts, geneIso, gene, designMatrix,
     iso<-rownames(iso_cm_gen)
     data<-data.frame(samples=rep(rownames(designMatrix), length(iso)), 
         condition=rep(designMatrix[,colName], length(iso)))
-    for (i in seq_along(iso)){
-        data[((i+ (i-1)*(nrow(designMatrix)-1)):(i+ (i-1)*(nrow(
-            designMatrix)-1)+nrow(designMatrix)-1)), "iso"]<-iso[i]
-    }
+    data[,"iso"]<-do.call(c, lapply(seq_along(iso), function(i){
+        return(rep(iso[i], nrow(designMatrix)))
+    }))
+    # for (i in seq_along(iso)){
+    #     data[((i+ (i-1)*(nrow(designMatrix)-1)):(i+ (i-1)*(nrow(
+    #         designMatrix)-1)+nrow(designMatrix)-1)), "iso"]<-iso[i]
+    # }
     data[,"counts"]<-as.numeric(t(iso_cm_gen[,rownames(designMatrix)]))
     data[,"all"]<-as.numeric(t(iso_cm_gen[,paste(rownames(designMatrix),
         "_All", sep="")]))
@@ -198,19 +201,28 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
             theta<-genePval<-NA
         }
     }else{
-        ratioControl<-ratioTreat<-NULL
-        for(i in seq_along(iso)){
-            ratioControl<-c(ratioControl, mean(myData[myData[,colName]== 
-                contrast[1] & myData[, "iso"] == iso[i], "counts"]/ myData[
-                myData[,colName]==contrast[1] & myData[, "iso"] == iso[i],
-                "all"]))
-            ratioTreat<-c(ratioTreat, mean(myData[myData[,colName]==
-                contrast[2]& myData[, "iso"] == iso[i], "counts"]/myData[
-                myData[,colName]==contrast[2]& myData[, "iso"] == iso[i], 
-                "all"] ))
-        }
-        testW<-data.frame(ratioControl=ratioControl, ratioTreat=ratioTreat, 
-            odd=NA, stat=NA, pval=NA)
+        # ratioControl<-ratioTreat<-NULL
+        # for(i in seq_along(iso)){
+        #     ratioControl<-c(ratioControl, mean(myData[myData[,colName]== 
+        #         contrast[1] & myData[, "iso"] == iso[i], "counts"]/ myData[
+        #         myData[,colName]==contrast[1] & myData[, "iso"] == iso[i],
+        #         "all"]))
+        #     ratioTreat<-c(ratioTreat, mean(myData[myData[,colName]==
+        #         contrast[2]& myData[, "iso"] == iso[i], "counts"]/myData[
+        #         myData[,colName]==contrast[2]& myData[, "iso"] == iso[i], 
+        #         "all"] ))
+        # }
+        ratios<-as.data.frame(do.call(rbind, lapply(seq_along(iso),function(i){
+            ratioControl<-mean(myData[myData[,colName]== contrast[1] & myData[,
+            "iso"] == iso[i], "counts"]/ myData[myData[, colName]==
+            contrast[1] & myData[, "iso"] == iso[i],"all"], na.rm=TRUE)
+            ratioTreat<-mean(myData[myData[,colName]==contrast[2]& myData[,
+            "iso"] == iso[i], "counts"]/myData[myData[,colName]==contrast[2]&
+            myData[, "iso"] == iso[i], "all"], na.rm=TRUE)
+            return(c(ratioControl=ratioControl, ratioTreat=ratioTreat))
+        })))
+        testW<-data.frame(ratioControl=ratios[,"ratioControl"], 
+            ratioTreat=ratios[,"ratioTreat"], odd=NA, stat=NA, pval=NA)
 #         theta<-sigma2<-FBeta<-genePval<-NA
         theta<-genePval<-NA
     }

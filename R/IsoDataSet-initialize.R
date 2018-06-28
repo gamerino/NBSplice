@@ -66,9 +66,13 @@ BPPARAM=bpparam()){
     # counts
         if(is.data.frame(isoCounts)){
             isoCounts<-as.matrix(isoCounts)
-            for(i in seq_len(ncol(isoCounts))){
-                isoCounts[,i]<-as.numeric(as.character(isoCounts[,i]))
-            }
+            # for(i in seq_len(ncol(isoCounts))){
+            #     isoCounts[,i]<-as.numeric(as.character(isoCounts[,i]))
+            # }
+            isoCounts[,seq_len(ncol(isoCounts))]<-vapply(
+                seq_len(ncol(isoCounts)), function(i){
+                    return(as.numeric(as.character(isoCounts[,i])))
+                }, as.numeric(as.character(isoCounts[,1])))
         }
         if(length(rownames(isoCounts)) ==0 | length(colnames(isoCounts)) ==0) {
             stop("The isoCounts object should have row and column names")

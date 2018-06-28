@@ -61,8 +61,38 @@ expression counts assigned to isoform *i* in experimental sample *j*. The
 values in the matrix should be un-normalized. We suggest the use of the 
 effective counts typically reported by the mentioned quantification tools. It 
 is not necessary to round those because `NBSplice` will do it internally.
-As an example, we have included an `isoCounts` matrix which is a 
-subset of one of the simulated matrix used to demonstrate `NBSplice` utility.
+The expression matrix could be easily obtained by the combination of 
+quantification files for all samples. For instance, if Kallisto was used to 
+transcript quantification, the expression matrix should be built combining the
+`est_counts` columns of those files as is shown in the code below.
+
+```{r expMat built, eval=FALSE}
+fileNames<-c(paste(rep("C1R",4), 1:4,"/abundance.tsv", sep=""),
+            paste(rep("C2R",4), 1:4,"/abundance.tsv", sep=""))
+
+myInfo<-lapply(seq_along(fileNames), function(x){
+    quant<-read.delim(fileNames[x], header = TRUE)
+    expression<-quant[,"est_counts"]
+    return(expression)
+})
+# Adding the isoform IDS as row names
+isoform_id<-read.delim(fileNames[x], header = TRUE)[,"target_id"]
+expressionMatrix<-(do.call(cbind, myInfo))
+rownames(expressionMatrix)<-isoform_id
+# Adding the samples names as column names
+colnames(expressionMatrix)<-c(paste(rep("C1R",4), 1:4, sep=""),
+                                paste(rep("C2R",4), 1:4, sep=""))
+```
+
+If another quantification tool was used, you only need to change the name
+of the quantification files and the name of the columns having estimated counts
+and isoforms IDs. For instance, for RSEM quantification, isoforms counts and
+IDS are in the `expected_count` and `transcript_id` columns of the 
+`Sample.isoforms.results` file, respectively. 
+
+As an example, we have included
+an `isoCounts` matrix which is a subset of one of the simulated matrix used to
+demonstrate `NBSplice` utility.
 
 ```{r expMat, eval=TRUE}
 data(isoCounts, package="NBSplice")
@@ -79,7 +109,16 @@ The `geneIso` matrix must have two columns called `isoform_id` and `gene_id`
 and as many rows as the `isoCounts` matrix. The *i*-th row of the `geneIso` 
 matrix specifies from which gene was originated the *i*-th isoform. This
 information will be used by `NBSplice` methods for model fitting and hypothesis
-tests. As an example, we provided a `geneIso` matrix associated with the
+tests. 
+This matrix could be easily obtained from the annotation file used for isoform
+quantification. For instance, if RSEM was used, the matrix can be built taking
+the first two columns (`transcript_id` and `gene_id`) of the 
+`Sample.isoforms.results` file. In the case of Kallisto, this information is 
+not stored in the quantification file. You could use the `biomaRt` R package 
+to obtain gene IDs for the quantified isoforms or the `refGenome` package
+to extract those from the annotation file.
+
+As an example, we provided a `geneIso` matrix associated with the
 `isoCounts` object previously loaded.
 
 ```{r geneIsoMat, eval=TRUE}
@@ -89,9 +128,8 @@ dim(geneIso)
 ```
 This matrix contains annotation information, so, you need to build it everytime
 that you change your reference transcriptome, downloading the respective 
-information from the database site. An easy way to obtain it is extracting 
-this from the quantification files obtained, for example, with RSEM (first two
-columns). 
+information from the database site. 
+
 ### Experiment data and colName
 
 The `designMatrix` table must contain experiment information relevant for the
@@ -103,13 +141,17 @@ must be the same of the `designMatrix` rows. Currently, `NBSplice` allows
 two-levels comparison of single-factor experiments (multiple-factor experiment
 comparisons are in development). In order to do this, it is necessary to 
 specify the argument `colName` which indicates the name of the `designMatrix` 
-column corresponding to that factor. As an example, we provided the 
-`designMatrix` associated to our `isoCounts` matrix.
+column corresponding to that factor. We provided the 
+`designMatrix` object associated to our `isoCounts` matrix which could be
+loaded doing `data(designMatrix, package="NBSplice")`. Alternatively, this
+matrix could be created using the code below.
 
 ```{r designMat, eval=TRUE}
-data(designMatrix, package="NBSplice")
-head(designMatrix)
-dim(designMatrix)
+designMatrix<-data.frame(sample=c(paste(rep("C1R", 4), 1:4, sep=""),
+                        paste(rep("C2R", 4), 1:4, sep="")), condition=c(rep(
+                        "Normal", 4), rep("Tumor", 4)))
+rownames(designMatrix)<-designMatrix[,"sample"]
+designMatrix
 ```
 
 In our case, we must define our `colName` argument indicating that our factor
@@ -149,12 +191,8 @@ have the same name as the class. In addition to the four arguments previously
 defined, it is possible to define the `BPPARAM` argument which must be a 
 `BiocParallelParam` instance defining the parallel back-end to be used 
 [@biocparallel].
-```{r object loading, echo=FALSE, eval=TRUE, results="hide"}
-library(NBSplice)
-data(myIsoDataSet, package="NBSplice")
-```
 
-```{r objectBuild, eval=FALSE}
+```{r objectBuild, eval=TRUE}
 library(NBSplice)
 myIsoDataSet<-IsoDataSet(isoCounts, designMatrix, colName, geneIso)
 ```
@@ -217,7 +255,7 @@ argument defining the two levels to be contrasted. By default, the `contrast`
 argument takes the two first levels of `colName`. `NBTest` returns an
 `NBSpliceRes` object which stores the obtained results. 
 
-```{r NBTest, eval=FALSE}
+```{r NBTest, eval=TRUE}
 myDSResults<-NBTest(myIsoDataSet, colName, test="F")
 ```
 

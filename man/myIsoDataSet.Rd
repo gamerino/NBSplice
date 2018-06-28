@@ -4,7 +4,7 @@
 \name{myIsoDataSet}
 \alias{myIsoDataSet}
 \title{An example of an IsoDataSet object.}
-\format{A data.frame object}
+\format{An IsoDataSet object}
 \source{
 see \code{\link{IsoDataSet-class}}
 }
@@ -14,7 +14,8 @@ the NBSplice R package.
 }
 \details{
 \describe{
-An IsoDataSet object built with the package example dataset.
+An IsoDataSet object built obtained using the code present as example in the
+\link{IsoDataSet} man page.
 }
 }
 \seealso{

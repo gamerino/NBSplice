@@ -4,7 +4,7 @@
 \name{myDSResults}
 \alias{myDSResults}
 \title{An example of an NBSpliceRes object.}
-\format{A data.frame object}
+\format{A NBSpliceRes object}
 \source{
 see \code{\link{NBSpliceRes-class}}
 }
@@ -13,7 +13,8 @@ An example of an NBSpliceRes object helpful to demonstrate the use of
 the NBSplice R package.
 
 \describe{
-An NBSpliceRes object built with the package example dataset.
+An NBSpliceRes object built obtained using the code present as example in the
+\link{NBTest} man page.
 }
 }
 \seealso{

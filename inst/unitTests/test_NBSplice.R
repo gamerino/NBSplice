@@ -133,7 +133,7 @@ test_GetDSResults<-function(){
     data(myDSResults, package="NBSplice")
     checkTrue(is.data.frame(GetDSResults(myDSResults)), 
             msg="Getting DS results type: OK.")
-    checkEquals(dim(GetDSResults(myDSResults)),c(126,10),
+    checkEquals(dim(GetDSResults(myDSResults)),c(116,10),
             msg = "Getting DS results dimension: OK.")
     checkEquals(dim(GetDSResults(NBSpliceRes())),c(0,0),
             msg = "Getting DS results dimension from an zero length object: 
@@ -142,9 +142,9 @@ test_GetDSResults<-function(){
 test_GetGeneResults<-function(){
     data(myDSResults, package="NBSplice")
     checkTrue(is.data.frame(GetGeneResults(myDSResults, 
-        gene = "ENSG00000010256")), msg="Getting DS gene results type: OK.")
-    checkEquals(dim(GetGeneResults(myDSResults, gene = "ENSG00000010256")),
-                c(9,10), msg = "Getting DS results dimension: OK.")
+        gene = "ENSG00000005889")), msg="Getting DS gene results type: OK.")
+    checkEquals(dim(GetGeneResults(myDSResults, gene = "ENSG00000005889")),
+                c(3,10), msg = "Getting DS results dimension: OK.")
 }
 
 ##-----------------------------------------------------------------------------
@@ -155,11 +155,11 @@ test_buildLowExpIdx<-function(){
     aux<-buildLowExpIdx(myIsoDataSet)
     checkTrue(length(lowExpIndex(aux)) > length(lowExpIndex(myIsoDataSet)), 
             msg="buildLowExp method performance: OK.")
-    checkEquals(length(lowExpIndex(aux)), 2146, 
+    checkEquals(length(lowExpIndex(aux)), 2224, 
             msg="buildLowExp length: OK.")
     checkTrue(is.integer(lowExpIndex(aux)), msg="buildLowExp object type: OK.")
     aux2<-buildLowExpIdx(myIsoDataSet, ratioThres = 1)
-    checkEquals(length(lowExpIndex(aux2)), 3024, 
+    checkEquals(length(lowExpIndex(aux2)), 3144, 
             msg="buildLowExp method performance extreme filtering value: OK.")
     
 }
@@ -169,7 +169,7 @@ test_NBTest<-function(){
     data(designMatrix, package="NBSplice")
     colName<-"condition"
     test<-"F"
-    GIR<-geneIso[geneIso[,"gene_id"]=="ENSG00000006704",]
+    GIR<-geneIso[geneIso[,"gene_id"]=="ENSG00000002016",]
     IC<-isoCounts[GIR[,"isoform_id"],]
     obj<-IsoDataSet(isoCounts = IC, experimentData=designMatrix, colName, 
         geneIso=GIR)
@@ -177,9 +177,9 @@ test_NBTest<-function(){
     res<-suppressWarnings(NBTest(object=obj2, colName, test))
     checkEquals(class(res)[1], "NBSpliceRes", 
             msg="Checking NBTest results type: OK.")
-    checkEquals(dim(results(res, filter=FALSE)), c(7,10), 
+    checkEquals(dim(results(res, filter=FALSE)), c(20,10), 
             msg="Checking NBTest results dimention: OK.")
-    checkEquals(dim(results(res, filter=TRUE)), c(3,10), 
+    checkEquals(dim(results(res, filter=TRUE)), c(1,10), 
             msg="Checking NBTest results dimention 2: OK.")
     checkTrue(all(!is.na(results(res, filter=TRUE)[, "geneFDR"])),  
             msg="Checking NBTest results computation: OK.")
@@ -189,7 +189,7 @@ test_NBTest<-function(){
 ##-----------------------------------------------------------------------------
 test_plotGeneResults<-function(){
     data(myDSResults, package="NBSplice")
-    g<-plotGeneResults(myDSResults, gene="ENSG00000006704")
+    g<-plotGeneResults(myDSResults, gene="ENSG00000002016")
     checkTrue(is.ggplot(g), msg = "Checking plotGeneResults class: OK.")
 }
 test_plotRatiosDisp<-function(){

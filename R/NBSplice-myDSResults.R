@@ -5,12 +5,13 @@
 #'the NBSplice R package.
 #'
 #'\describe{
-#'An NBSpliceRes object built with the package example dataset.
+#'An NBSpliceRes object built obtained using the code present as example in the
+#'\link{NBTest} man page.
 #'}
 #'
 #'@include NBSplice-myIsoDataSet.R
 #'@docType data
-#'@format A data.frame object
+#'@format A NBSpliceRes object
 #'@source see \code{\link{NBSpliceRes-class}}
 #'@name myDSResults
 #'@family NBSpliceRes

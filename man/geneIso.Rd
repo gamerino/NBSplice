@@ -14,7 +14,10 @@ A dataset containing isoform-gene relationships.
 }
 \details{
 \describe{
-Each row of this data.frame specifies one specific and unique isoform-gene
+This data.frame complements the expression matrix provided as the
+\link{isoCounts} data. See \link{isoCounts} man page for information about
+\link{geneIso} construction.
+Each row of this data.frame specifies one specific and unique isoform-gene 
 relationship.
 \item{gene_id}{Column with the gene names}.
 \item{isoform_id}{Column with the isoform names}.

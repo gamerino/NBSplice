@@ -4,12 +4,13 @@
 #'the NBSplice R package.
 #'
 #'\describe{
-#'An IsoDataSet object built with the package example dataset.
+#'An IsoDataSet object built obtained using the code present as example in the
+#'\link{IsoDataSet} man page.
 #'}
 #'
 #'@include NBSplice-designMatrix.R
 #'@docType data
-#'@format A data.frame object
+#'@format An IsoDataSet object
 #'@source see \code{\link{IsoDataSet-class}}
 #'@name myIsoDataSet
 #'@family IsoDataSet

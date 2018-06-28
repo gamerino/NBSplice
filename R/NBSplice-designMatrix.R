@@ -4,6 +4,9 @@
 #'A data.frame representing the design matrix related to the isoCounts dataset.
 #'
 #'\describe{
+#'This data.frame complements the expression matrix provided as the
+#'\link{isoCounts} data. See \link{isoCounts} man page for information about
+#'\link{designMatrix} construction.
 #'Each row of this data.frame specifies one experiment sample.
 #'\item{samples}{Column with samples names}.
 #'\item{condition}{Column indicating the condition of each sample}.

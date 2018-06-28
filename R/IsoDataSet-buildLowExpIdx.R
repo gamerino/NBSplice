@@ -62,11 +62,11 @@ setMethod(f="buildLowExpIdx", signature=signature(object="IsoDataSet"),
                     "experimental factor", sep=""))
     }
     samplesCols<-lapply(seq_along(condLevs), function(x){
-        return(rownames(designMatrix[designMatrix$condition==levels(
-            designMatrix$condition)[x],]))
+        return(rownames(designMatrix[designMatrix[,colName]==condLevs[x],]))
     })
     iso_cpm<-round(iso_cm[,do.call(c,samplesCols)])
     totalC<-round(iso_cm[,paste(do.call(c,samplesCols), "_All", sep="")])
+    
     idxLowRat<-do.call(c, bplapply(seq_len(nrow(iso_cm)), function(x){
         expAndRat<-do.call(rbind,lapply(seq_along(condLevs), function(i){
         dat<-iso_cpm[x,samplesCols[[i]], drop=FALSE]
@@ -76,10 +76,11 @@ setMethod(f="buildLowExpIdx", signature=signature(object="IsoDataSet"),
             dat<-iso_cpm[x,]
             allCounts<-totalC[x, , drop=FALSE]
             if(all(dat == allCounts)){ #only one isoform
-                if(rowMeans(allCounts) ==0 | any(expAndRat[,"meanCond"] < 
-                    countThres) ){
-                        j<-x}else{
-                        j<-NULL}
+                # if(rowMeans(allCounts) ==0 | any(expAndRat[,"meanCond"] < 
+                #     countThres) ){
+                        j<-x
+                        # }else{
+                        # j<-NULL}
             }else{
                 if( any(is.na(expAndRat[,"ratCond"])) | 
                     any(expAndRat[,"meanCond"] < countThres)  ){

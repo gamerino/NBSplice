@@ -6,9 +6,27 @@
 #'controlled. 
 #'
 #'\describe{
-#'Isoforms are represented in rows and samples in columns. Samples 'C1R1', 
-#''C1R2', 'C1R3' and 'C1R4' are from Normal condition whereas the other samples
-#' are from Tumor condition.
+#'Isoform expression matrix where isoforms are in rows and samples in columns. 
+#'Samples 'C1R1', 'C1R2', 'C1R3' and 'C1R4' are from Normal condition, whereas
+#''C2R1', 'C2R2', 'C2R3' and 'C2R4' are from Tumor condition.
+#'The matrix is a subset of an expression matrix obtained from a simulated 
+#'RNA-seq experiment where differential splicing is controlled, used for 
+#'NBSplice evaluation. The full expression matrix could be dowloaded from the
+#'GitHub respository https://github.com/gamerino/NBSpliceSuppInformation. In
+#'particular, the file expressionMatrixSim1.RData from the Data/sim1 folder
+#'was used here. The metadata information was obtained from the 
+#'isoInfoSim1.RData file, stored in the same folder. 
+#'For NBSplice package demonstration, a subset of 500 genes were selected doing
+#'genes<-unique(iso_info$gene_id)
+#'set.seed(12345)
+#'selectedGenes<-sample(genes, 500)
+#'isoInfo<-iso_info[iso_info$gene_id %in% selectedGenes,]
+#'geneIso<-isoInfo[, c("gene_id", "transcript_id")]
+#'colnames(geneIso)[2]<-"isoform_id"
+#'isoCounts<-iso_cm[isoInfo$transcript_id,]
+#'
+#'The isoCounts matrix, the geneIso and the designMatrix data.frames are 
+#'provided with NBSplice.
 #'}
 #'
 #'@include NBSpliceRes-plotGeneResults.R

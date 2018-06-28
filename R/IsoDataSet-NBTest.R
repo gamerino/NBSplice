@@ -78,9 +78,9 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
     }
     designMatrix<-expData(object)
     if(length(idxLowRat)>0){
-        geneIso<-isoGeneRel(object)[-idxLowRat,]
-        geneCounts<-object@geneCounts[-idxLowRat,]
-        isoCounts<-isoCounts(object)[-idxLowRat,]
+        geneIso<-isoGeneRel(object)[-idxLowRat,, drop=FALSE]
+        geneCounts<-object@geneCounts[-idxLowRat,, drop=FALSE]
+        isoCounts<-isoCounts(object)[-idxLowRat,, drop=FALSE]
     }else{
         geneIso<-isoGeneRel(object)
         geneCounts<-object@geneCounts
@@ -97,12 +97,14 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
             test=test, contrast=contrast)
         return(isoRes)
     }, BPPARAM=BPPARAM))
-
     resultsOK<-as.data.frame(resultsOK)
     # resultsOK<-resultsOK[!is.na(resultsOK$pval),]
-    for(i in seq(from=3, to=ncol(resultsOK))){
-        resultsOK[,i]<-as.numeric(as.character(resultsOK[,i]))
-    }
+    # for(i in seq(from=3, to=ncol(resultsOK))){
+    #     resultsOK[,i]<-as.numeric(as.character(resultsOK[,i]))
+    # }
+    resultsOK[,3:ncol(resultsOK)]<-vapply(3:ncol(resultsOK), function(i){
+            return(as.numeric(as.character(resultsOK[,i])))
+        }, as.numeric(as.character(resultsOK[,3])))
     resultsOK$geneFDR<-resultsOK$FDR<-NA
     resultsOK$FDR[!is.na(resultsOK[,"pval"])]<-p.adjust(resultsOK[!is.na(
         resultsOK[,"pval"]),"pval"], method="fdr")
@@ -112,9 +114,9 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
 
     # Add filtered isoforma and genes mean relative expression values
     if(length(idxLowRat) > 0 ){
-    geneIsoF<-isoGeneRel(object)[idxLowRat,]
-    geneCountsF<-object@geneCounts[idxLowRat,]
-    isoCountsF<-isoCounts(object)[idxLowRat,]
+    geneIsoF<-isoGeneRel(object)[idxLowRat, , drop=FALSE]
+    geneCountsF<-object@geneCounts[idxLowRat, , drop=FALSE]
+    isoCountsF<-isoCounts(object)[idxLowRat, , drop=FALSE]
     genesF<-as.character(unique(geneIsoF[,"gene_id"]))
     resultsF<-do.call(rbind, bplapply(seq_along(genesF), function(j){
         gene<-genesF[j]
@@ -122,24 +124,38 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
             geneIso=geneIsoF, gene=gene, designMatrix=designMatrix,
             colName=colName)
         iso<-unique(as.character(myData[,"iso"]))
-        ratioControl<-ratioTreat<-NULL
-
-        for(i in seq_along(iso)){
-            ratioControl<-c(ratioControl, mean(myData[myData[,colName]== 
-                contrast[1] & myData[, "iso"] == iso[i], "counts"]/ myData[
-                myData[,colName]==contrast[1] & myData[, "iso"] == iso[i],
-                "all"]))
-            ratioTreat<-c(ratioTreat, mean(myData[myData[,colName]==
-                contrast[2]& myData[, "iso"] == iso[i], "counts"]/myData[
-                myData[,colName]==contrast[2]& myData[, "iso"] == iso[i], 
-                "all"] ))
-        }
-        testW<-data.frame(ratioControl=ratioControl, ratioTreat=ratioTreat,
-            odd=NA, stat=NA, pval=NA) 
-#         theta<-sigma2<-FBeta<-genePval<-NA
-        theta<-genePval<-NA
-        isoRes<-cbind(iso=iso,gene=gene, ratioControl=testW[,"ratioControl"], 
-            ratioTreat=testW[,"ratioTreat"])
+#         ratioControl<-ratioTreat<-NULL
+# 
+#         for(i in seq_along(iso)){
+#             ratioControl<-c(ratioControl, mean(myData[myData[,colName]== 
+#                 contrast[1] & myData[, "iso"] == iso[i], "counts"]/ myData[
+#                 myData[,colName]==contrast[1] & myData[, "iso"] == iso[i],
+#                 "all"]))
+#             ratioTreat<-c(ratioTreat, mean(myData[myData[,colName]==
+#                 contrast[2]& myData[, "iso"] == iso[i], "counts"]/myData[
+#                 myData[,colName]==contrast[2]& myData[, "iso"] == iso[i], 
+#                 "all"] ))
+#         }
+#
+        ratios<-as.data.frame(do.call(rbind, lapply(seq_along(iso), 
+            function(i){
+            ratioControl<-mean(myData[myData[,colName]== contrast[1] & myData[,
+                "iso"] == iso[i], "counts"]/ myData[myData[,
+                colName]==contrast[1] & myData[, "iso"] == iso[i],"all"],
+                na.rm=TRUE)
+            ratioTreat<-mean(myData[myData[,colName]==contrast[2]& myData[,
+                "iso"] == iso[i], "counts"]/myData[myData[,
+                colName]==contrast[2]& myData[, "iso"] == iso[i], "all"], 
+                na.rm=TRUE)
+            return(c(ratioControl=ratioControl, ratioTreat=ratioTreat))
+            
+        })))
+# testW<-data.frame(ratioControl=ratiosratioControl, ratioTreat=ratioTreat,
+#     odd=NA, stat=NA, pval=NA) 
+# testW<-as.data.frame(ratios)
+# testW$odd<-testW$stat<-test$pval<-NA
+        isoRes<-cbind(iso=iso,gene=gene, ratioControl=ratios[,"ratioControl"], 
+            ratioTreat=ratios[,"ratioTreat"])
         colnames(isoRes)[c(3,4)]<-paste("ratio", contrast, sep="_")
         return(isoRes)}, BPPARAM=BPPARAM))
     resultsF<-as.data.frame(resultsF)
@@ -154,6 +170,9 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
         resultsOK[,i]<-as.character(resultsOK[,i])            
         resultsF[,i]<-as.character(resultsF[,i])
     }
+    resultsOK[,3:ncol(resultsOK)]<-vapply(3:ncol(resultsOK), function(i){
+        return(as.numeric(as.character(resultsOK[,i])))
+    }, as.numeric(as.character(resultsOK[,3])))
     resultsAll<-rbind(resultsOK, resultsF)
     }else{resultsAll<-resultsOK}
     rownames(resultsAll)<-as.character(resultsAll[,"iso"])
