@@ -159,10 +159,10 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">NBSplice-vignette</h1>
 <h4 class="author"><em>Gabriela A. Merino and Elmer A. Fernandez</em></h4>
-<h4 class="date"><em>28 junio 2018</em></h4>
+<h4 class="date"><em>6 julio 2018</em></h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-<p>NBSplice is an R package that uses isoform expression counts to evaluate differential splicing by means of generalized linear models at the gene level. The package allows the estimation of differences between isoforms’ relative expression to infer changes in alternative splicing patterns. This vignette explains the use of the package in a typical analysis workflow. NBSplice package version: 0.99.5</p>
+<p>NBSplice is an R package that uses isoform expression counts to evaluate differential splicing by means of generalized linear models at the gene level. The package allows the estimation of differences between isoforms’ relative expression to infer changes in alternative splicing patterns. This vignette explains the use of the package in a typical analysis workflow. NBSplice package version: 0.99.7</p>
 </div>
 
 </div>
@@ -200,8 +200,9 @@ $(document).ready(function () {
 <h1>NBSplice installation</h1>
 <p><code>NBSplice</code> is an R package sitting on Bioconductor. You could download the source file from the Bioconductor site (<a href="http://bioconductor.org/" class="uri">http://bioconductor.org/</a>) and then use <code>R CMD install</code>. Another easy way to install it is by doing:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## try http:// if https:// URLs are not supported
-<span class="kw">source</span>(<span class="st">&quot;https://bioconductor.org/biocLite.R&quot;</span>)
-<span class="kw">biocLite</span>(<span class="st">&quot;NBSplice&quot;</span>)</code></pre></div>
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;BiocManager&quot;</span>))
+    <span class="kw">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)
+BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;NBSplice&quot;</span>, <span class="dt">version=</span><span class="st">&quot;devel&quot;</span>)</code></pre></div>
 </div>
 <div id="analysis-workflow" class="section level1">
 <h1>Analysis workflow</h1>
@@ -248,13 +249,13 @@ expressionMatrix&lt;-(<span class="kw">do.call</span>(cbind, myInfo))
 <p>As an example, we provided a <code>geneIso</code> matrix associated with the <code>isoCounts</code> object previously loaded.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(geneIso, <span class="dt">package=</span><span class="st">&quot;NBSplice&quot;</span>)
 <span class="kw">head</span>(geneIso)</code></pre></div>
-<pre><code>##             gene_id      isoform_id
-## 147 ENSG00000002016 ENST00000228345
-## 148 ENSG00000002016 ENST00000358495
-## 149 ENSG00000002016 ENST00000397230
-## 150 ENSG00000002016 ENST00000430095
-## 151 ENSG00000002016 ENST00000461568
-## 152 ENSG00000002016 ENST00000463750</code></pre>
+<pre><code>##                         gene_id      isoform_id
+## ENST00000228345 ENSG00000002016 ENST00000228345
+## ENST00000358495 ENSG00000002016 ENST00000358495
+## ENST00000397230 ENSG00000002016 ENST00000397230
+## ENST00000430095 ENSG00000002016 ENST00000430095
+## ENST00000461568 ENSG00000002016 ENST00000461568
+## ENST00000463750 ENSG00000002016 ENST00000463750</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(geneIso)</code></pre></div>
 <pre><code>## [1] 3144    2</code></pre>
 <p>This matrix contains annotation information, so, you need to build it everytime that you change your reference transcriptome, downloading the respective information from the database site.</p>
@@ -318,10 +319,10 @@ myIsoDataSet&lt;-<span class="kw">IsoDataSet</span>(isoCounts, designMatrix, col
 ## ENSG00000005889 1241.74555 1167.8724 2177.0498
 ## 
 ## Isoform-Gene relationship: 
-##             gene_id      isoform_id
-## 147 ENSG00000002016 ENST00000228345
-## 148 ENSG00000002016 ENST00000358495
-## 149 ENSG00000002016 ENST00000397230
+##                         gene_id      isoform_id
+## ENST00000228345 ENSG00000002016 ENST00000228345
+## ENST00000358495 ENSG00000002016 ENST00000358495
+## ENST00000397230 ENSG00000002016 ENST00000397230
 ## 
 ## Design Matrix: 
 ##      sample condition
@@ -331,7 +332,7 @@ myIsoDataSet&lt;-<span class="kw">IsoDataSet</span>(isoCounts, designMatrix, col
 ## 
 ## Formula: 
 ##  counts ~ condition + iso + condition:iso
-## &lt;environment: 0x7f96dfb0e3c8&gt;</code></pre>
+## &lt;environment: 0x7fd4cbbd1338&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">isoCounts</span>(myIsoDataSet))</code></pre></div>
 <pre><code>##                      C1R1       C1R2     C1R3       C1R4     C2R1
 ## ENST00000228345 111.79303   0.000000 149.7884  141.06040 111.9745
@@ -573,7 +574,7 @@ T_j=\min \{ \frac{I_j p-value{(m)j}}{m}\}
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] NBSplice_0.99.5
+## [1] NBSplice_0.99.7
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] zip_1.0.0           Rcpp_0.12.17        mppa_1.0           

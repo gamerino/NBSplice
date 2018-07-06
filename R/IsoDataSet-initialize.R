@@ -77,14 +77,16 @@ BPPARAM=bpparam()){
         if(length(rownames(isoCounts)) ==0 | length(colnames(isoCounts)) ==0) {
             stop("The isoCounts object should have row and column names")
         }
-        .Object@counts<-isoCounts
-        #sort the geneIso with the rownmaes of IsoCounts
-        if(any(rownames(isoCounts) != rownames(geneIso))){
-        idx<-do.call(c, bplapply(seq_len(nrow(isoCounts)), function(i){
-            return(which(rownames(isoCounts)[i] == geneIso[, "isoform_id"]))
-        },BPPARAM=BPPARAM))
-        geneIso<-geneIso[idx,]
+        if(is.factor(geneIso[,"gene_id"])){
+            geneIso[,"gene_id"]<-as.character(geneIso[,"gene_id"])
         }
+        if(is.factor(geneIso[,"isoform_id"])){
+            geneIso[,"isoform_id"]<-as.character(geneIso[,"isoform_id"])
+        }
+        #sort the IsoCounts and GeneIso by gene name
+        geneIso<-geneIso[order(geneIso[,"gene_id"]),]
+        isoCounts<-isoCounts[geneIso[,"isoform_id"],]
+        .Object@counts<-isoCounts
         # isoGeneRel slot
         .Object@isoGeneRel<-geneIso
         # geneCounts slot

@@ -34,8 +34,9 @@ then use `R CMD install`. Another easy way to install it is by doing:
 
 ```{r bioC, eval=FALSE}
 ## try http:// if https:// URLs are not supported
-source("https://bioconductor.org/biocLite.R")
-biocLite("NBSplice")
+if (!require("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install("NBSplice", version="devel")
 ```
 
 # Analysis workflow
