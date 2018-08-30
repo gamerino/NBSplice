@@ -93,7 +93,7 @@ BPPARAM=bpparam()){
         geneCounts<-totalGeneCounts(isoCounts, geneIso, BPPARAM)
         .Object@geneCounts<-geneCounts
         # colData slot
-        colData<-experimentData[colnames(isoCounts), ]
+        colData<-experimentData[colnames(isoCounts), ,drop=FALSE]
         .Object@colData<-colData
         # design slot
         .Object@design<-as.formula(paste("counts~", colName, "+iso+", colName, 
