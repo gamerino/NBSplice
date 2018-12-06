@@ -1,7 +1,7 @@
 Package: NBSplice
 Type: Package
-Version: 1.1.0
-Date: 2018-08-30
+Version: 1.1.1
+Date: 2018-12-06
 Title: Negative Binomial Models to detect Differential Splicing
 Author: Gabriela A. Merino and Elmer A. Fernandez
 Maintainer: Gabriela Merino <merino.gabriela33@gmail.com>
@@ -57,6 +57,6 @@ Collate:
     'NBSplice-myIsoDataSet.R'
     'NBSplice-myDSResults.R'
 biocViews: Software, StatisticalMethod, AlternativeSplicing, Regression,
-    DifferentialExpression, DifferentialSplicing, RNASeq
+    DifferentialExpression, DifferentialSplicing, RNASeq, ImmunoOncology
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
