@@ -1,6 +1,10 @@
 Package: NBSplice
 Type: Package
+<<<<<<< HEAD
 Version: 1.0.1
+=======
+Version: 1.1.1
+>>>>>>> a2302a5... Adding ImmunoOncology as a BiocView
 Date: 2018-12-06
 Title: Negative Binomial Models to detect Differential Splicing
 Author: Gabriela A. Merino and Elmer A. Fernandez
