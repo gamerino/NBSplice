@@ -39,7 +39,7 @@ setGeneric(name="results", def=function(object, filter=TRUE){
 #'@aliases results,NBSpliceRes-method
 setMethod(f="results", signature="NBSpliceRes", 
 definition=function(object, filter=TRUE){
-    if(filter & nrow(object@results)>0){
+    if(filter & nrow(object@results)>0 & length(object@lowExpIndex)>0){
         ret<-object@results[-object@lowExpIndex,]
         ret[,"pval"]<-as.numeric(as.character(ret[,"pval"]))
         return(ret[!is.na(ret[,"pval"]),])
