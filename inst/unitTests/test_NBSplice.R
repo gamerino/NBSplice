@@ -155,7 +155,7 @@ test_buildLowExpIdx<-function(){
     aux<-buildLowExpIdx(myIsoDataSet)
     checkTrue(length(lowExpIndex(aux)) > length(lowExpIndex(myIsoDataSet)), 
             msg="buildLowExp method performance: OK.")
-    checkEquals(length(lowExpIndex(aux)), 2224, 
+    checkEqualsNumeric(length(lowExpIndex(aux)), 2224, 
             msg="buildLowExp length: OK.")
     checkTrue(is.integer(lowExpIndex(aux)), msg="buildLowExp object type: OK.")
     aux2<-buildLowExpIdx(myIsoDataSet, ratioThres = 1)
