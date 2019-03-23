@@ -108,11 +108,15 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
     resultsOK$geneFDR<-resultsOK$FDR<-NA
     resultsOK$FDR[!is.na(resultsOK[,"pval"])]<-p.adjust(resultsOK[!is.na(
         resultsOK[,"pval"]),"pval"], method="fdr")
-    resultsOK$geneFDR[!is.na(resultsOK[,"genePval"])]<-p.adjust(resultsOK[
-        !is.na(resultsOK[,"genePval"]),"genePval"], method="fdr")
+    uniqGPval<-unique(resultsOK[,c("gene","genePval")])
+    uniqPval<-uniqGPval[!is.na(uniqGPval[,"genePval"]),"genePval"]
+    names(uniqPval)<-uniqGPval[!is.na(uniqGPval[,"genePval"]),"gene"]
+    uniqPadj<-p.adjust(uniqPval, method="fdr")
+    resultsOK$geneFDR<-uniqPadj[
+        match(as.character(resultsOK[,"gene"]), names(uniqPadj))]
     rownames(resultsOK)<-seq_len(nrow(resultsOK))
 
-    # Add filtered isoforma and genes mean relative expression values
+    # Add filtered isoforms and genes mean relative expression values
     if(length(idxLowRat) > 0 ){
     geneIsoF<-isoGeneRel(object)[idxLowRat, , drop=FALSE]
     geneCountsF<-object@geneCounts[idxLowRat, , drop=FALSE]
@@ -180,6 +184,13 @@ setMethod(f="NBTest", signature=signature(object="IsoDataSet"),
     iso_cm<-isoCounts(object)
     resultsAll<-resultsAll[rownames(iso_cm),]
     rownames(resultsAll)<-seq_len(nrow(resultsAll))
+    
+    resultsAll$genePval<-uniqPval[match(as.character(resultsAll[,"gene"]),
+        names(uniqPval))]
+    
+    resultsAll$geneFDR<-uniqPadj[match(as.character(resultsAll[,"gene"]),
+                                        names(uniqPadj))]
+    
     genes<-unique(resultsAll[,"gene"])
     disp<-do.call(c,lapply(genes, function(gene){
         if(any(!is.na(resultsAll[resultsAll[,"gene"]==gene,"theta"]))){
