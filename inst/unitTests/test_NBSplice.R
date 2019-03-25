@@ -133,7 +133,7 @@ test_GetDSResults<-function(){
     data(myDSResults, package="NBSplice")
     checkTrue(is.data.frame(GetDSResults(myDSResults)), 
             msg="Getting DS results type: OK.")
-    checkEquals(dim(GetDSResults(myDSResults)),c(116,10),
+    checkEquals(dim(GetDSResults(myDSResults)),c(110,10),
             msg = "Getting DS results dimension: OK.")
     checkEquals(dim(GetDSResults(NBSpliceRes())),c(0,0),
             msg = "Getting DS results dimension from an zero length object: 
