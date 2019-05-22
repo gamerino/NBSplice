@@ -35,9 +35,9 @@ test_IsoDataSetWithData<-function(){
     data(geneIso, package="NBSplice")
     colName<-"condition"    
     checkEquals(ncol(isoCounts), nrow(designMatrix),
-                msg="isoCounts and designMatrix consistency: OK.")
+            msg="isoCounts and designMatrix consistency: OK.", tolerance=0.1)
     checkEquals(nrow(isoCounts), nrow(geneIso),
-                msg="isoCounts and geneIso consistency: OK.")
+                msg="isoCounts and geneIso consistency: OK.", tolerance=0.1)
     checkTrue(all(rownames(isoCounts)==rownames(geneIso)),
                 msg="isoCounts and geneIso order: OK.")
     checkTrue(any(colnames(designMatrix)==colName),
@@ -56,7 +56,7 @@ test_IsoDataSetWithData<-function(){
     checkTrue(is.data.frame(expData(object)),  
                 msg="IsoDataSet colData slot type: OK.")
     checkEquals(class(designFormula(object)),"formula",  
-                msg="IsoDataSet design slot type: OK.")
+                msg="IsoDataSet design slot type: OK.", tolerance=0.1)
     #lowExpIndex
     checkTrue(is.integer(lowExpIndex(object)), 
                 msg="LowExpIndex slot type: OK.")
@@ -83,7 +83,7 @@ test_expData<-function(){
 test_designFormula<-function(){
     data(myIsoDataSet, package="NBSplice")
     checkEquals(class(designFormula(myIsoDataSet)),"formula",  
-            msg="IsoDataSet design slot type: OK.")
+            msg="IsoDataSet design slot type: OK.", tolerance=0.1)
 }
 test_isoGeneRel<-function(){
     data(myIsoDataSet, package="NBSplice")
@@ -104,7 +104,7 @@ test_results<-function(){
     checkTrue(all(c("iso", "gene", "FDR", "geneFDR") %in% colnames(results(
         myDSResults))), msg="Results slot columns: OK.")
     checkEquals(dim(results(NBSpliceRes())),c(0,0),
-            msg = "Results slot from an zero length object: OK.")
+        msg = "Results slot from an zero length object: OK.", tolerance=0.1)
 }
 test_contrast<-function(){
     data(myDSResults, package="NBSplice")
@@ -113,38 +113,38 @@ test_contrast<-function(){
     checkTrue(all(contrast(myDSResults) %in% c("Normal", "Tumor")),
             msg="Contrast slot: OK.")
     checkEquals(length(contrast(NBSpliceRes())),0,
-            msg = "Contrast slot from an zero length object: OK.")
+        msg = "Contrast slot from an zero length object: OK.", tolerance=0.1)
 }
 test_disp<-function(){
     data(myDSResults, package="NBSplice")
     checkTrue(is.numeric(disp(myDSResults)),
             msg="Dispersion slot type: OK.")
     checkEquals(length(disp(NBSpliceRes())),0,
-            msg = "Dispersion slot from an zero length object: OK.")
+        msg = "Dispersion slot from an zero length object: OK.", tolerance=0.1)
 }
 test_GetDSGenes<-function(){
     data(myDSResults, package="NBSplice")
     checkTrue(is.character(GetDSGenes(myDSResults)), 
             msg="Getting DS genes type: OK.")
     checkEquals(length(GetDSGenes(NBSpliceRes())),0,
-            msg = "Getting DS genes from an zero length object: OK.")
+        msg = "Getting DS genes from an zero length object: OK.", tolerance=0.1)
 }
 test_GetDSResults<-function(){
     data(myDSResults, package="NBSplice")
     checkTrue(is.data.frame(GetDSResults(myDSResults)), 
             msg="Getting DS results type: OK.")
     checkEquals(dim(GetDSResults(myDSResults)),c(110,10),
-            msg = "Getting DS results dimension: OK.")
+            msg = "Getting DS results dimension: OK.", tolerance=0.1)
     checkEquals(dim(GetDSResults(NBSpliceRes())),c(0,0),
             msg = "Getting DS results dimension from an zero length object: 
-                OK.")
+                OK.", tolerance=0.1)
 }
 test_GetGeneResults<-function(){
     data(myDSResults, package="NBSplice")
     checkTrue(is.data.frame(GetGeneResults(myDSResults, 
         gene = "ENSG00000005889")), msg="Getting DS gene results type: OK.")
     checkEquals(dim(GetGeneResults(myDSResults, gene = "ENSG00000005889")),
-                c(3,10), msg = "Getting DS results dimension: OK.")
+            c(3,10), msg = "Getting DS results dimension: OK.", tolerance=0.1)
 }
 
 ##-----------------------------------------------------------------------------
@@ -156,11 +156,12 @@ test_buildLowExpIdx<-function(){
     checkTrue(length(lowExpIndex(aux)) > length(lowExpIndex(myIsoDataSet)), 
             msg="buildLowExp method performance: OK.")
 #    checkEqualsNumeric(round(length(lowExpIndex(aux))), 2224, 
-#            msg="buildLowExp length: OK.")
+#            msg="buildLowExp length: OK.", tolerance=0.1)
     checkTrue(is.integer(lowExpIndex(aux)), msg="buildLowExp object type: OK.")
     aux2<-buildLowExpIdx(myIsoDataSet, ratioThres = 1)
     checkEquals(length(lowExpIndex(aux2)), 3144, 
-            msg="buildLowExp method performance extreme filtering value: OK.")
+            msg="buildLowExp method performance extreme filtering value: OK."
+            , tolerance=0.1)
     
 }
 test_NBTest<-function(){
@@ -176,11 +177,11 @@ test_NBTest<-function(){
     obj2<-buildLowExpIdx(obj)
     res<-suppressWarnings(NBTest(object=obj2, colName, test))
     checkEquals(class(res)[1], "NBSpliceRes", 
-            msg="Checking NBTest results type: OK.")
+            msg="Checking NBTest results type: OK.", tolerance=0.1)
     checkEquals(dim(results(res, filter=FALSE)), c(20,10), 
-            msg="Checking NBTest results dimention: OK.")
+            msg="Checking NBTest results dimention: OK.", tolerance=0.1)
     checkEquals(dim(results(res, filter=TRUE)), c(1,10), 
-            msg="Checking NBTest results dimention 2: OK.")
+            msg="Checking NBTest results dimention 2: OK.", tolerance=0.1)
     checkTrue(all(!is.na(results(res, filter=TRUE)[, "geneFDR"])),  
             msg="Checking NBTest results computation: OK.")
 }
