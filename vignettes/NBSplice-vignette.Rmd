@@ -149,8 +149,9 @@ matrix could be created using the code below.
 
 ```{r designMat, eval=TRUE}
 designMatrix<-data.frame(sample=c(paste(rep("C1R", 4), 1:4, sep=""),
-                        paste(rep("C2R", 4), 1:4, sep="")), condition=c(rep(
-                        "Normal", 4), rep("Tumor", 4)))
+                        paste(rep("C2R", 4), 1:4, sep="")), condition=factor(c(
+                        rep("Normal", 4), rep("Tumor", 4)), levels=c("Normal",
+                        "Tumor")))
 rownames(designMatrix)<-designMatrix[,"sample"]
 designMatrix
 ```
