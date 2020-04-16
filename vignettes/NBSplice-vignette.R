@@ -25,10 +25,12 @@ head(geneIso)
 dim(geneIso)
 
 ## ----designMat, eval=TRUE------------------------------------------------
-data(designMatrix, package="NBSplice")
-head(designMatrix)
-dim(designMatrix)
-
+designMatrix<-data.frame(sample=c(paste(rep("C1R", 4), 1:4, sep=""),
+                        paste(rep("C2R", 4), 1:4, sep="")), condition=factor(c(
+                        rep("Normal", 4), rep("Tumor", 4)), levels=c("Normal",
+                        "Tumor")))
+rownames(designMatrix)<-designMatrix[,"sample"]
+designMatrix
 ## ----colData, eval=TRUE--------------------------------------------------
 colName<-"condition"
 levels(designMatrix[,colName])
@@ -45,7 +47,8 @@ show(myIsoDataSet)
 head(isoCounts(myIsoDataSet))
 
 ## ----lowExp, eval=TRUE---------------------------------------------------
-myIsoDataSet<-buildLowExpIdx(myIsoDataSet, colName, ratioThres = 0.01, countThres = 1)
+myIsoDataSet<-buildLowExpIdx(myIsoDataSet, colName, ratioThres = 0.01, 
+                             countThres = 1)
 
 ## ----NBTest, eval=FALSE--------------------------------------------------
 ## myDSResults<-NBTest(myIsoDataSet, colName, test="F")
@@ -83,7 +86,8 @@ plotGeneResults(myDSResults, gene)
 
 ## ----plotGene2, eval=TRUE------------------------------------------------
 ## Keeping non-reliable and non-significant isoforms
-plotGeneResults(myDSResults, gene, filterLowExpIso = FALSE, filterNotSignificant = FALSE)
+plotGeneResults(myDSResults, gene, filterLowExpIso = FALSE, 
+                filterNotSignificant = FALSE)
 
 
 ## ----sessionInfo---------------------------------------------------------
