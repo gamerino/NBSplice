@@ -26,7 +26,7 @@ Imports:
 Suggests:
     knitr,
     RUnit,
-    BiocGenerics
+    BiocGenerics,
     BiocStyle
 Collate:
     'NBSplice-package.R'
