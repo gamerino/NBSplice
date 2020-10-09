@@ -1,0 +1,28 @@
+citHeader("To cite package 'NBSplice' in publications use:")
+
+citEntry(
+  entry="article",
+  title =
+  "Differential splicing analysis based on isoforms expression with NBSplice",
+  author = c(
+    person(given = "Gabriela", middle = "A", family = "Merino"),
+    person(given = "Elmer", middle = "A", family = "Fernandez")
+  ),
+  journal = "Journal of Biomedical Informatics",
+  pages = "103378",
+  volume = "103",
+  year = 2020,
+  publisher = "Elsevier",
+  textVersion = paste0(
+    "Merino, G. A., & Fernandez, E. A. ",
+    "(2020). Differential splicing analysis based on isoforms ",
+    "expression with NBSplice. Journal of Biomedical Informatics, ",
+    "103, 103378."
+  )
+)
+
+citFooter(paste0(
+  "This free open-source software implements academic research by the authors ",
+  "and co-workers. If you use it, please support the project by citing the ",
+  "appropriate journal article."
+))

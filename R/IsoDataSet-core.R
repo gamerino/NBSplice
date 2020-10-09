@@ -119,14 +119,14 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
     iso<-levels(myData[, "iso"])
     myData[,"counts"]<-round(myData[,"counts"])
     myData[,"all"]<-round(myData[,"all"])
-    myData<-myData[as.character(myData[, "condition"]) %in% contrast, ]
-    myData[,"condition"]<-factor(as.character(myData[, "condition"]), 
+    myData<-myData[as.character(myData[, colName]) %in% contrast, ]
+    myData[,colName]<-factor(as.character(myData[, colName]), 
         levels=contrast)
     if(length(levels(myData[,"iso"]))> 1 & all(myData[,"all"] > 0) & !(all(
         myData[,"counts"] ==(myData[,"all"] -myData[,"counts"])))){
-#             modl<-tryCatch(glm.nb(formula,
             modl<-suppressWarnings(
-                tryCatch(glm.nb(counts~condition+iso+condition:iso, 
+                tryCatch(glm.nb(formula,
+#                tryCatch(glm.nb(counts~condition+iso+condition:iso, 
                 offset=log(myData[,"all"]), 
                 link="log", data=myData, control=glm.control()),
                 error=function(cond){FALSE}))
@@ -141,7 +141,8 @@ fitModel<-function(myData, gene, formula, colName, test=c("F", "Chisq"),
                 form<-as.formula(paste("counts~", colName))
 #                 modl<-tryCatch( glm.nb(form, offset=log(
                 modl<-suppressWarnings(
-                    tryCatch( glm.nb(counts~condition, offset=log(
+                    tryCatch( glm.nb(form, offset=log(
+#                    tryCatch( glm.nb(counts~condition, offset=log(
 
                     myData[,"all"]), link="log", data=myData, 
                     control=glm.control()), error=function(cond){FALSE}))
