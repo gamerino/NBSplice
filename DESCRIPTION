@@ -28,7 +28,8 @@ Suggests:
     RUnit,
     BiocGenerics,
     BiocStyle,
-    rmarkdown
+    rmarkdown,
+    markdown
 Collate:
     'NBSplice-package.R'
     'IsoDataSet.R'
