@@ -1,7 +1,7 @@
 Package: NBSplice
 Type: Package
-Version: 1.11.0
-Date: 2020-10-09
+Version: 1.11.1
+Date: 2021-09-03
 Title: Negative Binomial Models to detect Differential Splicing
 Author: Gabriela A. Merino and Elmer A. Fernandez
 Maintainer: Gabriela Merino <merino.gabriela33@gmail.com>
@@ -27,7 +27,8 @@ Suggests:
     knitr,
     RUnit,
     BiocGenerics,
-    BiocStyle
+    BiocStyle,
+    rmarkdown
 Collate:
     'NBSplice-package.R'
     'IsoDataSet.R'
